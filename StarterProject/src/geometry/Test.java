@@ -18,6 +18,55 @@ public class Test {
 		double result=point1.distance(6, 7);
 		System.out.println(result);
 		
+		//vezbe 3  - 13.3
+		Point  p2 = new Point();
+		Line l1 = new Line();
+		Rectangle r1 = new Rectangle();
+		Circle c1 = new Circle();
+		p2.setX(10);
+		p2.setY(15);
+		//1. inicijalizacija x point1 na vrednost y p2
+		point1.setX(p2.getY());
+		System.out.println("X koordinata tacke point1 : " + point1.getX());
+		//2.
+		l1.setStartPoint(point1);
+		l1.setEndPoint(p2);
+		System.out.println("Start point X: " + l1.getStartPoint().getX());
+		System.out.println("Start point Y: " + l1.getStartPoint().getY());
+		System.out.println("End point X: " + l1.getEndPoint().getX());
+		System.out.println("End point Y: " + l1.getEndPoint().getY());
+		//3.
+		l1.getEndPoint().setY(23);
+		System.out.println("End point Y: " + l1.getEndPoint().getY());
+		
+		//4.
+		l1.getStartPoint().setX(l1.getEndPoint().getY());
+		System.out.println("Start point X: " + l1.getStartPoint().getX());
+		
+		//5.
+		l1.getEndPoint().setX((int)l1.lenght()-(l1.getStartPoint().getX() + l1.getStartPoint().getY()));
+		System.out.println("Start point X: " + l1.getEndPoint().getX());
+		
+		//6.
+		r1.setUpperLeftPoint(new Point());
+		r1.getUpperLeftPoint().setX(10);
+		r1.getUpperLeftPoint().setY(15);
+		System.out.println("Start rectangle point X: " + r1.getUpperLeftPoint().getX());
+		System.out.println("Start rectangle point Y: " + r1.getUpperLeftPoint().getY());
+		// p i o od r1
+		r1.setWidth(20);
+		r1.setHeight(10);
+		System.out.println("Povrsina r1:"+r1.area());
+		System.out.println("Obim r1:"+r1.circumference());
+		
+		//7 centar c1 na koordinate od r1 tacke gore levo
+		c1.setCenter(r1.getUpperLeftPoint());
+		System.out.println("Centar kruga c1: "+ "("+ c1.getCenter().getX() + "," + c1.getCenter().getY() + ")");
+		
+		//8.
+		c1.getCenter().setX(r1.area() - l1.getStartPoint().getY());
+		System.out.println("Centar kruga c1: "+ "("+ c1.getCenter().getX() + "," + c1.getCenter().getY() + ")");
+		
 	}
 
 }
