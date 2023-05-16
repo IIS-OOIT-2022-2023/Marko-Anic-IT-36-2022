@@ -49,11 +49,11 @@ public class Drawing extends JPanel {
 		shapes.add(d1);
 		shapes.add(r1);
 		Iterator<Shape> it = shapes.iterator();
-		/* zadatak 1 
+		// zadatak 1 
 		while(it.hasNext())
 		{
 		it.next().moveBy(10,0);
-		} */
+		} 
 		
 		//zadatak 2
 		 g.setColor(Color.BLACK);

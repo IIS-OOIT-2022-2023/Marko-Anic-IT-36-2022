@@ -82,5 +82,25 @@ public class Line extends Shape{
 			g.drawRect(endPoint.getX()-2, endPoint.getY()-2, 4, 4);
 		}
 	}
+	
+	@Override
+	public void moveTo(int x, int y) {
+		this.startPoint.moveTo(x,y);
+
+	}
+
+	@Override
+	public void moveBy(int byX, int byY) {
+		this.startPoint.moveBy(byX,byY);
+		this.endPoint.moveBy(byX,byY);
+
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		if (o instanceof Line)
+			return (int) (this.length() - ((Line) o).length());
+		return 0;
+	}
 
 }

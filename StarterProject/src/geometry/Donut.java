@@ -85,4 +85,10 @@ public class Donut extends Circle{
 			g.drawRect(getCenter().getX() - 2, getCenter().getY() -2 + innerRadius, 4, 4);
 		}
 	}
+	
+	public int compareTo(Object o) {
+		if (o instanceof Donut)
+			return (int) (this.area() - ((Donut) o).area());
+		return 0;
+	}
 }
