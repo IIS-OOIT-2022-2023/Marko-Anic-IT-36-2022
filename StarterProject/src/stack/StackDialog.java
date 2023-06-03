@@ -27,6 +27,7 @@ public class StackDialog extends JDialog {
 	private JTextField txtRadius;
     private Circle circle;
     private boolean isOk;
+    
 	/**
 	 * Launch the application.
 	 */

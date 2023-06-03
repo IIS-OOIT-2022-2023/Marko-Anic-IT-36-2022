@@ -89,34 +89,33 @@ public class FrmMain extends JFrame {
 			gbc_btnDodaj.gridx = 0;
 			gbc_btnDodaj.gridy = 1;
 			contentPane.add(btnDodaj, gbc_btnDodaj);
-			
+		
 			JButton btnObrisi = new JButton("Obrisi");
 			btnObrisi.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
+			    public void actionPerformed(ActionEvent e) {
+			    	dialog = new StackDialog(); 
+			    	dialog.setTitle("Brisanje kruga");
+			        if (!circleListModel.isEmpty()) {
+			            
+			            Circle circle = circleListModel.get(0);
+			            dialog.getTxtX().setText(String.valueOf(circle.getCenter().getX()));
+			            dialog.getTxtY().setText(String.valueOf(circle.getCenter().getY()));
+			            dialog.getTxtRadius().setText(String.valueOf(circle.getRadius()));
+			            
+			            dialog.setVisible(true);
 
-					
-					if(!circleListModel.isEmpty()) {
-						dialog.setTitle("Brisanje kruga");	                    
-						Circle circle = circleListModel.get(0);
-	    				dialog.setVisible(true);
-	    				dialog.getTxtX().setText(String.valueOf(circle.getCenter().getX()));
-	                    dialog.getTxtY().setText(String.valueOf(circle.getCenter().getY()));
-	                    dialog.getTxtRadius().setText(String.valueOf(circle.getRadius()));
-	                    
-	                    if(dialog.isOk()) {
-	                    	dialog.setOk(false);
-	                    	circleListModel.remove(0);                    	
-	                    }
-					}
-					else
-					{
-						JOptionPane.showMessageDialog(FrmMain.this,
-	                            "Lista je prazna!",
-	                            "Greška",
-	                            JOptionPane.ERROR_MESSAGE);
-					}
-				}	
+			            if (dialog.isOk()) {
+			                circleListModel.remove(0);
+			            }
+			        } else {
+			            JOptionPane.showMessageDialog(FrmMain.this,
+			                    "Lista je prazna!",
+			                    "Greška",
+			                    JOptionPane.ERROR_MESSAGE);
+			        }
+			    }
 			});
+
 			btnObrisi.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			GridBagConstraints gbc_btnObrisi = new GridBagConstraints();
 			gbc_btnObrisi.insets = new Insets(0, 0, 5, 0);
