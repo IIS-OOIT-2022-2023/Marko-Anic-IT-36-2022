@@ -78,7 +78,7 @@ public class FrmMain extends JFrame {
 					if(dialog.isOk())
 					{
 					 Circle circle = dialog.getCircle();
-		                	circleListModel.add(0, circle);
+		             circleListModel.add(0, circle);
 					}   
 				}
 			});
