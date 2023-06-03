@@ -73,7 +73,6 @@ public class FrmMain extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					dialog = new StackDialog();
 					dialog.setVisible(true);
-					dialog.setTitle("Dodavanje kruga");
 					if(dialog.isOk())
 					{
 					 Circle circle = dialog.getCircle();

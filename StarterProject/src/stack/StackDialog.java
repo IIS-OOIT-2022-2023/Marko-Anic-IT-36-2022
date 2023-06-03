@@ -121,7 +121,7 @@ public StackDialog() {
 						if (validateInput()) {
 		                    int x = Integer.parseInt(txtX.getText());
 		                    int y = Integer.parseInt(txtY.getText());
-		                    int radius = Integer.parseInt(txtRadius.getText());
+		                    double radius = Double.parseDouble(txtRadius.getText());
 		                   // JOptionPane.showMessageDialog(null,radius);
 		                    if(radius >0)
 		                    {
@@ -202,7 +202,7 @@ public StackDialog() {
                 && isNumeric(xText) && isNumeric(yText) && isNumeric(radiusText);
     }
 	  private boolean isNumeric(String str) {
-	        return str.matches("-?\\d+");
+	        return str.matches("-?\\d+(\\.\\d+)?");
 	    }
 
 	

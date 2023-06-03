@@ -5,13 +5,13 @@ import javax.swing.JOptionPane;
 public class Circle {
 	private int x;
 	private int y;
-	private int radius;
+	private double radius;
 	
 	public Circle()
 	{
 		
 	}
-	public Circle (int x, int y, int radius)
+	public Circle (int x, int y, double radius)
 	{
 		this.x = x;
 		this.y = y;
@@ -29,10 +29,10 @@ public class Circle {
 	public void setY(int y) {
 		this.y = y;
 	}
-	public int getRadius() {
+	public double getRadius() {
 		return radius;
 	}
-	public void setRadius(int radius) {
+	public void setRadius(double radius) {
 		if(radius >0) {
 			this.radius = radius;
 			}
