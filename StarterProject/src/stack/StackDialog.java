@@ -1,5 +1,8 @@
 package stack;
 
+import geometry.Circle;
+import geometry.Point;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -121,11 +124,11 @@ public StackDialog() {
 						if (validateInput()) {
 		                    int x = Integer.parseInt(txtX.getText());
 		                    int y = Integer.parseInt(txtY.getText());
-		                    double radius = Double.parseDouble(txtRadius.getText());
+		                    int radius = Integer.parseInt(txtRadius.getText());
 		                   // JOptionPane.showMessageDialog(null,radius);
 		                    if(radius >0)
 		                    {
-		                    	circle = new Circle(x, y, radius);
+		                    	circle = new Circle(new Point(x,y), radius);
 		                    	isOk=true;
 		                    	dispose();
 		                    }

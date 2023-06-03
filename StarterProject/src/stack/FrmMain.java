@@ -1,5 +1,7 @@
 package stack;
 
+import geometry.Circle;
+
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -97,8 +99,8 @@ public class FrmMain extends JFrame {
 						dialog.setTitle("Brisanje kruga");	                    
 						Circle circle = circleListModel.get(0);
 	    				dialog.setVisible(true);
-	                    dialog.getTxtX().setText(String.valueOf(circle.getX()));
-	                    dialog.getTxtY().setText(String.valueOf(circle.getY()));
+	    				dialog.getTxtX().setText(String.valueOf(circle.getCenter().getX()));
+	                    dialog.getTxtY().setText(String.valueOf(circle.getCenter().getY()));
 	                    dialog.getTxtRadius().setText(String.valueOf(circle.getRadius()));
 	                    
 	                    if(dialog.isOk()) {
