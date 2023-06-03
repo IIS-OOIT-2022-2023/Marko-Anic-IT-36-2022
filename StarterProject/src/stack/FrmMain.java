@@ -71,6 +71,8 @@ public class FrmMain extends JFrame {
 			JButton btnDodaj = new JButton("Dodaj");
 			btnDodaj.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					StackDialog dialog = new StackDialog();
+					dialog.setVisible(true);
 				}
 			});
 			btnDodaj.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -84,6 +86,7 @@ public class FrmMain extends JFrame {
 			JButton btnObrisi = new JButton("Obrisi");
 			btnObrisi.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
 				}	
 			});
 			btnObrisi.setFont(new Font("Tahoma", Font.PLAIN, 16));
