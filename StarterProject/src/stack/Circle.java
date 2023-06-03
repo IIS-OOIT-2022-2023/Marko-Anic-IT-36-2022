@@ -38,7 +38,7 @@ public class Circle {
 			}
 		else
 		{
-			
+		radius=0;	
 	}
 }
 	
