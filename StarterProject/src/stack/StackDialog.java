@@ -121,16 +121,15 @@ public StackDialog() {
 		                    int y = Integer.parseInt(txtY.getText());
 		                    int radius = Integer.parseInt(txtRadius.getText());
 		                   // JOptionPane.showMessageDialog(null,radius);
-		                    if(radius <=0)
+		                    if(radius >0)
 		                    {
-		                    	JOptionPane.showMessageDialog(StackDialog.this,"Radius ne moze biti manji od 0.","Greška",JOptionPane.ERROR_MESSAGE);
+		                    	circle = new Circle(x, y, radius);
 		                    	dispose();
 		                    }
-		                    circle = new Circle(x, y, radius);
-		                    if(circle.getRadius()==0)
-		                    	circle=null;
-		                    dispose();
-		                } else {
+		                    else
+		                    	JOptionPane.showMessageDialog(StackDialog.this,"Radius ne moze biti manji od 0.","Greška",JOptionPane.ERROR_MESSAGE);
+		                } 
+						else {
 		                    JOptionPane.showMessageDialog(StackDialog.this,
 		                            "Molimo popunite sva polja sa ispravnim vrednostima.",
 		                            "Greška",
