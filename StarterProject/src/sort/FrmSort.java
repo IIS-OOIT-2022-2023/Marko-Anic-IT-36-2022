@@ -2,13 +2,15 @@ package sort;
 
 import java.awt.EventQueue;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import geometry.Circle;
-import stack.FrmMain;
+import geometry.Point;
+import geometry.Rectangle;
 import stack.StackDialog;
 
 import java.awt.FlowLayout;
@@ -26,6 +28,8 @@ import java.awt.GridBagConstraints;
 public class FrmSort extends JFrame {
 
 	private JPanel contentPane;
+	private DefaultListModel<Circle> circleListModel;
+	private JList<Circle> circleList;
 
 	/**
 	 * Launch the application.
@@ -47,6 +51,8 @@ public class FrmSort extends JFrame {
 	 * Create the frame.
 	 */
 	public FrmSort() {
+		circleListModel = new DefaultListModel<>();
+		circleList = new JList<>(circleListModel);
 		setTitle("Marko Anić IT-36/2022");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -61,7 +67,7 @@ public class FrmSort extends JFrame {
 		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
-		JList circleList = new JList();
+		
 		GridBagConstraints gbc_circleList = new GridBagConstraints();
 		gbc_circleList.gridwidth = 2;
 		gbc_circleList.insets = new Insets(15, 15, 15, 15);
@@ -72,6 +78,15 @@ public class FrmSort extends JFrame {
 		
 
 		JButton btnDodaj = new JButton("Dodaj");
+		btnDodaj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				StackDialog dialog = new StackDialog();
+				dialog.setVisible(true);
+				
+				Circle circle = dialog.getCircle();
+				circleListModel.addElement(circle);;
+			}
+		});
 		btnDodaj.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_btnDodaj = new GridBagConstraints();
 		gbc_btnDodaj.anchor = GridBagConstraints.EAST;
