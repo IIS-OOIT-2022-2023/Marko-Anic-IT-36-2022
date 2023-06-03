@@ -73,10 +73,12 @@ public class FrmMain extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					dialog = new StackDialog();
 					dialog.setVisible(true);
-					
+					dialog.setTitle("Dodavanje kruga");
+					if(dialog.isOk())
+					{
 					 Circle circle = dialog.getCircle();
 		                	circleListModel.add(0, circle);
-		                
+					}   
 				}
 			});
 			btnDodaj.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -92,18 +94,18 @@ public class FrmMain extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 
 					
-					if (!circleListModel.isEmpty()) {
-	                    
+					if(!circleListModel.isEmpty()) {
+						dialog.setTitle("Brisanje kruga");	                    
 						Circle circle = circleListModel.get(0);
-	              
 	    				dialog.setVisible(true);
 	                    dialog.getTxtX().setText(String.valueOf(circle.getX()));
 	                    dialog.getTxtY().setText(String.valueOf(circle.getY()));
 	                    dialog.getTxtRadius().setText(String.valueOf(circle.getRadius()));
 	                    
-	                    if(dialog.isOk())
+	                    if(dialog.isOk()) {
+	                    	dialog.setOk(false);
 	                    	circleListModel.remove(0);                    	
-
+	                    }
 					}
 					else
 					{

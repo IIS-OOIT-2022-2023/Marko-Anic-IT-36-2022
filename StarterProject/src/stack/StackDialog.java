@@ -41,6 +41,7 @@ public class StackDialog extends JDialog {
 	 * Create the dialog.
 	 */
 public StackDialog() {
+		setTitle("Dodavanje kruga");
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -188,7 +189,10 @@ public StackDialog() {
 	{
 		return this.isOk;
 	}
-	 
+	public void setOk(boolean isOk)
+	{
+		this.isOk = isOk;
+	}
 	private boolean validateInput() {
         String xText = txtX.getText();
         String yText = txtY.getText();
