@@ -26,8 +26,8 @@ public class StackDialog extends JDialog {
 	private JTextField txtY;
 	private JTextField txtRadius;
     private Circle circle;
-    private boolean isOk;
-    
+    private boolean isOk=false;
+    private JButton btnOdustani;
 	/**
 	 * Launch the application.
 	 */
@@ -149,7 +149,7 @@ public StackDialog() {
 				getRootPane().setDefaultButton(btnPotvrdi);
 			}
 			{
-				JButton btnOdustani = new JButton("Odustani");
+			 btnOdustani = new JButton("Odustani");
 				btnOdustani.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						isOk=false;
@@ -208,6 +208,14 @@ public StackDialog() {
 	  private boolean isNumeric(String str) {
 	        return str.matches("-?\\d+(\\.\\d+)?");
 	    }
+
+	public JButton getBtnOdustani() {
+		return btnOdustani;
+	}
+
+	public void setBtnOdustani(JButton btnOdustani) {
+		this.btnOdustani = btnOdustani;
+	}
 
 	
 

@@ -19,6 +19,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -30,7 +33,7 @@ public class FrmSort extends JFrame {
 	private JPanel contentPane;
 	private DefaultListModel<Circle> circleListModel;
 	private JList<Circle> circleList;
-
+	private StackDialog dialog;
 	/**
 	 * Launch the application.
 	 */
@@ -51,6 +54,7 @@ public class FrmSort extends JFrame {
 	 * Create the frame.
 	 */
 	public FrmSort() {
+		
 		circleListModel = new DefaultListModel<>();
 		circleList = new JList<>(circleListModel);
 		setTitle("Marko Anić IT-36/2022");
@@ -80,11 +84,13 @@ public class FrmSort extends JFrame {
 		JButton btnDodaj = new JButton("Dodaj");
 		btnDodaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				StackDialog dialog = new StackDialog();
+				dialog = new StackDialog();
 				dialog.setVisible(true);
 				
 				Circle circle = dialog.getCircle();
-				circleListModel.addElement(circle);;
+				if(circle!=null)
+				circleListModel.addElement(circle);
+				
 			}
 		});
 		btnDodaj.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -96,6 +102,27 @@ public class FrmSort extends JFrame {
 		contentPane.add(btnDodaj, gbc_btnDodaj);
 		
 		JButton btnObrisi = new JButton("Sortiraj");
+		btnObrisi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				  if (!circleListModel.isEmpty()) {
+					  
+			            List<Circle> circles = new ArrayList<>();
+			            for (int i = 0; i < circleListModel.size(); i++) {
+			                circles.add(circleListModel.getElementAt(i));
+			            }
+
+			            Collections.sort(circles);
+
+			            circleListModel.clear();
+			            for (Circle circle : circles) {
+			                circleListModel.addElement(circle);
+			            }
+			        } else {
+			            JOptionPane.showMessageDialog(FrmSort.this, "Lista je prazna!", "Greska!", JOptionPane.ERROR_MESSAGE);
+			        }
+			}
+		});
 		btnObrisi.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_btnSort = new GridBagConstraints();
 		gbc_btnSort.insets = new Insets(0, 0, 5, 0);
