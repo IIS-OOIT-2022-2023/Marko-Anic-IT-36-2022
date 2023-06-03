@@ -81,8 +81,8 @@ public class FrmSort extends JFrame {
 		contentPane.add(circleList, gbc_circleList);
 		
 
-		JButton btnDodaj = new JButton("Dodaj");
-		btnDodaj.addActionListener(new ActionListener() {
+		JButton btnAdd = new JButton("Add");
+		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dialog = new StackDialog();
 				dialog.setVisible(true);
@@ -93,16 +93,16 @@ public class FrmSort extends JFrame {
 				
 			}
 		});
-		btnDodaj.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		GridBagConstraints gbc_btnDodaj = new GridBagConstraints();
-		gbc_btnDodaj.anchor = GridBagConstraints.EAST;
-		gbc_btnDodaj.insets = new Insets(0, 0, 5, 10);
-		gbc_btnDodaj.gridx = 0;
-		gbc_btnDodaj.gridy = 1;
-		contentPane.add(btnDodaj, gbc_btnDodaj);
+		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
+		gbc_btnAdd.anchor = GridBagConstraints.EAST;
+		gbc_btnAdd.insets = new Insets(0, 0, 5, 10);
+		gbc_btnAdd.gridx = 0;
+		gbc_btnAdd.gridy = 1;
+		contentPane.add(btnAdd, gbc_btnAdd);
 		
-		JButton btnObrisi = new JButton("Sortiraj");
-		btnObrisi.addActionListener(new ActionListener() {
+		JButton btnSort = new JButton("Sort");
+		btnSort.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				  if (!circleListModel.isEmpty()) {
@@ -119,17 +119,17 @@ public class FrmSort extends JFrame {
 			                circleListModel.addElement(circle);
 			            }
 			        } else {
-			            JOptionPane.showMessageDialog(FrmSort.this, "Lista je prazna!", "Greska!", JOptionPane.ERROR_MESSAGE);
+			            JOptionPane.showMessageDialog(FrmSort.this, "The list is empty!", "Error!", JOptionPane.ERROR_MESSAGE);
 			        }
 			}
 		});
-		btnObrisi.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnSort.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_btnSort = new GridBagConstraints();
 		gbc_btnSort.insets = new Insets(0, 0, 5, 0);
 		gbc_btnSort.anchor = GridBagConstraints.WEST;
 		gbc_btnSort.gridx = 1;
 		gbc_btnSort.gridy = 1;
-		contentPane.add(btnObrisi, gbc_btnSort);
+		contentPane.add(btnSort, gbc_btnSort);
 
 	}
 

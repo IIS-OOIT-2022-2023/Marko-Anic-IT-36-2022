@@ -27,7 +27,7 @@ public class StackDialog extends JDialog {
 	private JTextField txtRadius;
     private Circle circle;
     private boolean isOk=false;
-    private JButton btnOdustani;
+
 	/**
 	 * Launch the application.
 	 */
@@ -45,7 +45,7 @@ public class StackDialog extends JDialog {
 	 * Create the dialog.
 	 */
 public StackDialog() {
-		setTitle("Dodavanje kruga");
+		setTitle("Add circle");
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -119,8 +119,8 @@ public StackDialog() {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton btnPotvrdi = new JButton("Potvrdi");
-				btnPotvrdi.addActionListener(new ActionListener() {
+				JButton btnOk = new JButton("Ok");
+				btnOk.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (validateInput()) {
 		                    int x = Integer.parseInt(txtX.getText());
@@ -134,30 +134,30 @@ public StackDialog() {
 		                    	dispose();
 		                    }
 		                    else
-		                    	JOptionPane.showMessageDialog(StackDialog.this,"Radius ne moze biti manji od 0.","Greška",JOptionPane.ERROR_MESSAGE);
+		                    	JOptionPane.showMessageDialog(StackDialog.this,"The radius cannot be less than 0.","Greška",JOptionPane.ERROR_MESSAGE);
 		                } 
 						else {
 		                    JOptionPane.showMessageDialog(StackDialog.this,
-		                            "Molimo popunite sva polja sa ispravnim vrednostima.",
-		                            "Greška",
+		                            "Please fill in all fields with correct values.",
+		                            "Error!",
 		                            JOptionPane.ERROR_MESSAGE);
 		                }
 		            }	
 				});
-				btnPotvrdi.setActionCommand("OK");
-				buttonPane.add(btnPotvrdi);
-				getRootPane().setDefaultButton(btnPotvrdi);
+				btnOk.setActionCommand("OK");
+				buttonPane.add(btnOk);
+				getRootPane().setDefaultButton(btnOk);
 			}
 			{
-			 btnOdustani = new JButton("Odustani");
-				btnOdustani.addActionListener(new ActionListener() {
+			 JButton btnCancel = new JButton("Cancel");
+				btnCancel.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						isOk=false;
 						dispose();
 					}
 				});
-				btnOdustani.setActionCommand("Cancel");
-				buttonPane.add(btnOdustani);
+				btnCancel.setActionCommand("Cancel");
+				buttonPane.add(btnCancel);
 			}
 		}
 	}
@@ -209,13 +209,6 @@ public StackDialog() {
 	        return str.matches("-?\\d+(\\.\\d+)?");
 	    }
 
-	public JButton getBtnOdustani() {
-		return btnOdustani;
-	}
-
-	public void setBtnOdustani(JButton btnOdustani) {
-		this.btnOdustani = btnOdustani;
-	}
 
 	
 

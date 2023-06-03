@@ -70,8 +70,8 @@ public class FrmMain extends JFrame {
 			gbc_circleList.gridy = 0;
 			contentPane.add(circleList, gbc_circleList);
 			
-			JButton btnDodaj = new JButton("Dodaj");
-			btnDodaj.addActionListener(new ActionListener() {
+			JButton btnAdd = new JButton("Add");
+			btnAdd.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					dialog = new StackDialog();
 					dialog.setVisible(true);
@@ -82,19 +82,19 @@ public class FrmMain extends JFrame {
 					}   
 				}
 			});
-			btnDodaj.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			GridBagConstraints gbc_btnDodaj = new GridBagConstraints();
-			gbc_btnDodaj.anchor = GridBagConstraints.EAST;
-			gbc_btnDodaj.insets = new Insets(0, 0, 5, 10);
-			gbc_btnDodaj.gridx = 0;
-			gbc_btnDodaj.gridy = 1;
-			contentPane.add(btnDodaj, gbc_btnDodaj);
+			btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			GridBagConstraints gbc_btnAdd = new GridBagConstraints();
+			gbc_btnAdd.anchor = GridBagConstraints.EAST;
+			gbc_btnAdd.insets = new Insets(0, 0, 5, 10);
+			gbc_btnAdd.gridx = 0;
+			gbc_btnAdd.gridy = 1;
+			contentPane.add(btnAdd, gbc_btnAdd);
 		
-			JButton btnObrisi = new JButton("Obrisi");
-			btnObrisi.addActionListener(new ActionListener() {
+			JButton btnDelete = new JButton("Delete");
+			btnDelete.addActionListener(new ActionListener() {
 			    public void actionPerformed(ActionEvent e) {
 			    	dialog = new StackDialog(); 
-			    	dialog.setTitle("Brisanje kruga");
+			    	dialog.setTitle("Delete circle");
 			        if (!circleListModel.isEmpty()) {
 			            
 			            Circle circle = circleListModel.get(0);
@@ -109,20 +109,20 @@ public class FrmMain extends JFrame {
 			            }
 			        } else {
 			            JOptionPane.showMessageDialog(FrmMain.this,
-			                    "Lista je prazna!",
-			                    "Greška",
+			                    "The list is empty!",
+			                    "Error!",
 			                    JOptionPane.ERROR_MESSAGE);
 			        }
 			    }
 			});
 
-			btnObrisi.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			GridBagConstraints gbc_btnObrisi = new GridBagConstraints();
-			gbc_btnObrisi.insets = new Insets(0, 0, 5, 0);
-			gbc_btnObrisi.anchor = GridBagConstraints.WEST;
-			gbc_btnObrisi.gridx = 1;
-			gbc_btnObrisi.gridy = 1;
-			contentPane.add(btnObrisi, gbc_btnObrisi);
+			btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			GridBagConstraints gbc_btnDelete = new GridBagConstraints();
+			gbc_btnDelete.insets = new Insets(0, 0, 5, 0);
+			gbc_btnDelete.anchor = GridBagConstraints.WEST;
+			gbc_btnDelete.gridx = 1;
+			gbc_btnDelete.gridy = 1;
+			contentPane.add(btnDelete, gbc_btnDelete);
 
 			}
 
