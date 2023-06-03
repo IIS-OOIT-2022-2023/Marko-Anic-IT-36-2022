@@ -23,6 +23,7 @@ public class StackDialog extends JDialog {
 	private JTextField txtY;
 	private JTextField txtRadius;
     private Circle circle;
+    private boolean isOk;
 	/**
 	 * Launch the application.
 	 */
@@ -124,6 +125,7 @@ public StackDialog() {
 		                    if(radius >0)
 		                    {
 		                    	circle = new Circle(x, y, radius);
+		                    	isOk=true;
 		                    	dispose();
 		                    }
 		                    else
@@ -145,6 +147,8 @@ public StackDialog() {
 				JButton btnOdustani = new JButton("Odustani");
 				btnOdustani.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						isOk=false;
+						dispose();
 					}
 				});
 				btnOdustani.setActionCommand("Cancel");
@@ -180,6 +184,11 @@ public StackDialog() {
 	 public Circle getCircle() {
 	        return circle;
 	    }
+	public boolean isOk()
+	{
+		return this.isOk;
+	}
+	 
 	private boolean validateInput() {
         String xText = txtX.getText();
         String yText = txtY.getText();

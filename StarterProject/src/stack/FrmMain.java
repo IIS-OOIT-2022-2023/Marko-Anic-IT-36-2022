@@ -21,7 +21,7 @@ public class FrmMain extends JFrame {
 	private JPanel contentPane;
     private JList<Circle> circleList;
 	private DefaultListModel<Circle> circleListModel;
-
+    private StackDialog dialog;
 
 	/**
 	 * Launch the application.
@@ -71,7 +71,7 @@ public class FrmMain extends JFrame {
 			JButton btnDodaj = new JButton("Dodaj");
 			btnDodaj.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					StackDialog dialog = new StackDialog();
+					dialog = new StackDialog();
 					dialog.setVisible(true);
 					
 					 Circle circle = dialog.getCircle();
@@ -90,7 +90,28 @@ public class FrmMain extends JFrame {
 			JButton btnObrisi = new JButton("Obrisi");
 			btnObrisi.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+
 					
+					if (!circleListModel.isEmpty()) {
+	                    
+						Circle circle = circleListModel.get(0);
+	              
+	    				dialog.setVisible(true);
+	                    dialog.getTxtX().setText(String.valueOf(circle.getX()));
+	                    dialog.getTxtY().setText(String.valueOf(circle.getY()));
+	                    dialog.getTxtRadius().setText(String.valueOf(circle.getRadius()));
+	                    
+	                    if(dialog.isOk())
+	                    	circleListModel.remove(0);                    	
+
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(FrmMain.this,
+	                            "Lista je prazna!",
+	                            "Greška",
+	                            JOptionPane.ERROR_MESSAGE);
+					}
 				}	
 			});
 			btnObrisi.setFont(new Font("Tahoma", Font.PLAIN, 16));
