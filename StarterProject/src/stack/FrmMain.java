@@ -73,6 +73,10 @@ public class FrmMain extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					StackDialog dialog = new StackDialog();
 					dialog.setVisible(true);
+					
+					 Circle circle = dialog.getCircle();
+		                	circleListModel.add(0, circle);
+		                
 				}
 			});
 			btnDodaj.setFont(new Font("Tahoma", Font.PLAIN, 16));

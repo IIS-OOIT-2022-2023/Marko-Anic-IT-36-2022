@@ -22,6 +22,7 @@ public class StackDialog extends JDialog {
 	private JTextField txtX;
 	private JTextField txtY;
 	private JTextField txtRadius;
+    private Circle circle;
 	/**
 	 * Launch the application.
 	 */
@@ -39,7 +40,6 @@ public class StackDialog extends JDialog {
 	 * Create the dialog.
 	 */
 public StackDialog() {
-		
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -116,6 +116,26 @@ public StackDialog() {
 				JButton btnPotvrdi = new JButton("Potvrdi");
 				btnPotvrdi.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						if (validateInput()) {
+		                    int x = Integer.parseInt(txtX.getText());
+		                    int y = Integer.parseInt(txtY.getText());
+		                    int radius = Integer.parseInt(txtRadius.getText());
+		                   // JOptionPane.showMessageDialog(null,radius);
+		                    if(radius <=0)
+		                    {
+		                    	JOptionPane.showMessageDialog(StackDialog.this,"Radius ne moze biti manji od 0.","Greška",JOptionPane.ERROR_MESSAGE);
+		                    	dispose();
+		                    }
+		                    circle = new Circle(x, y, radius);
+		                    if(circle.getRadius()==0)
+		                    	circle=null;
+		                    dispose();
+		                } else {
+		                    JOptionPane.showMessageDialog(StackDialog.this,
+		                            "Molimo popunite sva polja sa ispravnim vrednostima.",
+		                            "Greška",
+		                            JOptionPane.ERROR_MESSAGE);
+		                }
 		            }	
 				});
 				btnPotvrdi.setActionCommand("OK");
@@ -158,7 +178,20 @@ public StackDialog() {
 	public void setTxtRadius(JTextField txtRadius) {
 		this.txtRadius = txtRadius;
 	}
-
+	 public Circle getCircle() {
+	        return circle;
+	    }
+	private boolean validateInput() {
+        String xText = txtX.getText();
+        String yText = txtY.getText();
+        String radiusText = txtRadius.getText();
+        
+        return !xText.isEmpty() && !yText.isEmpty() && !radiusText.isEmpty()
+                && isNumeric(xText) && isNumeric(yText) && isNumeric(radiusText);
+    }
+	  private boolean isNumeric(String str) {
+	        return str.matches("-?\\d+");
+	    }
 
 	
 

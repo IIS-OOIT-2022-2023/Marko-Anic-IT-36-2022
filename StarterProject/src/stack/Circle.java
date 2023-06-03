@@ -1,5 +1,7 @@
 package stack;
 
+import javax.swing.JOptionPane;
+
 public class Circle {
 	private int x;
 	private int y;
@@ -13,7 +15,7 @@ public class Circle {
 	{
 		this.x = x;
 		this.y = y;
-		this.radius= radius;
+		setRadius(radius);
 	}
 	public int getX() {
 		return x;
@@ -31,11 +33,14 @@ public class Circle {
 		return radius;
 	}
 	public void setRadius(int radius) {
-		if(this.radius >0) 
+		if(radius >0) {
 			this.radius = radius;
+			}
 		else
-			System.out.println("Radius ne moze biti manji od nule!");
+		{
+			
 	}
+}
 	
 	
 	@Override
