@@ -1,7 +1,9 @@
 package sort;
 
+import java.awt.Component;
 import java.awt.EventQueue;
 
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -57,6 +59,21 @@ public class FrmSort extends JFrame {
 		
 		circleListModel = new DefaultListModel<>();
 		circleList = new JList<>(circleListModel);
+		circleList.setCellRenderer(new DefaultListCellRenderer() {
+		    @Override
+		    public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+		        super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+		        if (value instanceof Circle) {
+		            Circle circle = (Circle) value;
+		            String text = circle.toString() + ", area: " + circle.area();
+		            setText(text);
+		        }
+
+		        return this;
+		    }
+		});
+
 		setTitle("Marko Anić IT-36/2022");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -118,6 +135,7 @@ public class FrmSort extends JFrame {
 			            for (Circle circle : circles) {
 			                circleListModel.addElement(circle);
 			            }
+			            
 			        } else {
 			            JOptionPane.showMessageDialog(FrmSort.this, "The list is empty!", "Error!", JOptionPane.ERROR_MESSAGE);
 			        }
