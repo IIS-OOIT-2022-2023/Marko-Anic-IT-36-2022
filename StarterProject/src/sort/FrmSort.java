@@ -59,6 +59,7 @@ public class FrmSort extends JFrame {
 		
 		circleListModel = new DefaultListModel<>();
 		circleList = new JList<>(circleListModel);
+		circleList.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		circleList.setCellRenderer(new DefaultListCellRenderer() {
 		    @Override
 		    public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -76,7 +77,7 @@ public class FrmSort extends JFrame {
 
 		setTitle("Marko Anić IT-36/2022");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 600);
+		setBounds(100, 100, 600, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 

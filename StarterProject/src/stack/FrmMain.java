@@ -50,7 +50,7 @@ public class FrmMain extends JFrame {
 	        circleList.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			setTitle("Marko Anić IT-36/2022");
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setBounds(100, 100, 800, 600);
+			setBounds(100, 100, 600, 450);
 			contentPane = new JPanel();
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
