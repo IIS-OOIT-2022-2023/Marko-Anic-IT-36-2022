@@ -150,9 +150,9 @@ public class FrmDraw extends JFrame {
 				{
 					 int x = e.getX();
 			         int y = e.getY();
-			          circle = new Circle(new Point(x, y), 30);
-			            Graphics g = panel.getGraphics();
-			            circle.draw(g);
+			         circle = new Circle(new Point(x, y), 30);
+			         Graphics g = panel.getGraphics();
+			         circle.draw(g);
 				}
 				}
 			
