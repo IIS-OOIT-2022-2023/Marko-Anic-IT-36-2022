@@ -27,7 +27,11 @@ public class FrmDraw extends JFrame {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private final ButtonGroup buttonGroup2 = new ButtonGroup();
 	private Circle circle;
-
+	private Point point;
+	private Point startPoint;
+	private Rectangle rectangle;
+	private Donut donut;
+	private Line line;
 	/**
 	 * Launch the application.
 	 */
@@ -98,15 +102,15 @@ public class FrmDraw extends JFrame {
 		gbc_tglbtnCircle.gridy = 2;
 		contentPane.add(tglbtnCircle, gbc_tglbtnCircle);
 		
-		JToggleButton tglbtnDonnut = new JToggleButton("Donnut");
-		tglbtnDonnut.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonGroup.add(tglbtnDonnut);
-		GridBagConstraints gbc_tglbtnDonnut = new GridBagConstraints();
-		gbc_tglbtnDonnut.anchor = GridBagConstraints.WEST;
-		gbc_tglbtnDonnut.insets = new Insets(0, 0, 5, 0);
-		gbc_tglbtnDonnut.gridx = 8;
-		gbc_tglbtnDonnut.gridy = 2;
-		contentPane.add(tglbtnDonnut, gbc_tglbtnDonnut);
+		JToggleButton tglbtnDonut = new JToggleButton("Donut");
+		tglbtnDonut.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		buttonGroup.add(tglbtnDonut);
+		GridBagConstraints gbc_tglbtnDonut = new GridBagConstraints();
+		gbc_tglbtnDonut.anchor = GridBagConstraints.WEST;
+		gbc_tglbtnDonut.insets = new Insets(0, 0, 5, 0);
+		gbc_tglbtnDonut.gridx = 8;
+		gbc_tglbtnDonut.gridy = 2;
+		contentPane.add(tglbtnDonut, gbc_tglbtnDonut);
 		
 		JToggleButton tglbtnDraw = new JToggleButton("Draw");
 		buttonGroup2.add(tglbtnDraw);
@@ -146,13 +150,37 @@ public class FrmDraw extends JFrame {
 		panel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(tglbtnDraw.isSelected() && tglbtnCircle.isSelected())
+				Graphics g = panel.getGraphics();
+				int x = e.getX();
+				int y = e.getY();
+				if(tglbtnDraw.isSelected())
 				{
-					 int x = e.getX();
-			         int y = e.getY();
+					if(tglbtnDot.isSelected())
+					{
+						point = new Point(x,y);
+						point.draw(g);
+						
+					}
+					if(tglbtnLine.isSelected())
+					{
+						if (startPoint == null) {
+		                    // First click, store the starting point
+		                    startPoint = new Point(x, y);
+		                } else {
+		                    // Second click, create the line
+		                    Point endPoint = new Point(x, y);
+		                    Line line = new Line(startPoint, endPoint);
+		                    line.draw(g);
+
+		                    // Reset the starting point
+		                    startPoint = null;
+		                }
+					}
+					if(tglbtnCircle.isSelected())
+					{
 			         circle = new Circle(new Point(x, y), 30);
-			         Graphics g = panel.getGraphics();
 			         circle.draw(g);
+			         }
 				}
 				}
 			
