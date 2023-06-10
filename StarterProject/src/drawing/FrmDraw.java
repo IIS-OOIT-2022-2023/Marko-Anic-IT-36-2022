@@ -176,11 +176,21 @@ public class FrmDraw extends JFrame {
 		                    startPoint = null;
 		                }
 					}
+					if(tglbtnRectangle.isSelected())
+					{
+						rectangle = new Rectangle(new Point(x,y),30,40);
+						rectangle.draw(g);
+					}
 					if(tglbtnCircle.isSelected())
 					{
 			         circle = new Circle(new Point(x, y), 30);
 			         circle.draw(g);
 			         }
+					if(tglbtnDonut.isSelected())
+					{
+						donut = new Donut(new Point(x,y),30,10);
+						donut.draw(g);
+					}
 				}
 				}
 			
