@@ -99,6 +99,7 @@ public class DlgPoint extends JDialog {
 						int x = Integer.parseInt(txtX.getText());
 						int y= Integer.parseInt(txtY.getText());
 						point= new Point(x,y);
+						dispose();
 					}
 				});
 				okButton.setActionCommand("OK");
