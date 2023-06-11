@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import geometry.Line;
 import geometry.Point;
+import geometry.Rectangle;
 
 import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
@@ -31,6 +32,7 @@ public class FrmDraw extends JFrame {
 	private Point point;
 	private Line line;
 	private Point startPoint;
+	private Rectangle rectangle;
 	/**
 	 * Launch the application.
 	 */
@@ -129,6 +131,7 @@ public class FrmDraw extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int x = e.getX();
 				int y = e.getY();
+				
 				if(tglbtnDraw.isSelected())
 				{
 					
@@ -167,6 +170,19 @@ public class FrmDraw extends JFrame {
 			                }
 					}
 					
+					if(tglbtnRectangle.isSelected())
+					{
+						DlgRectangle dialog = new DlgRectangle();
+						dialog.getTxtX().setText(String.valueOf(x));
+						dialog.getTxtY().setText(String.valueOf(y));
+						dialog.setVisible(true);
+						
+						if(dialog.isOk())
+						{
+						rectangle = dialog.getRectangle();
+						pnl.addShape(rectangle);
+						}
+					}
 					
 					
 				}
