@@ -6,9 +6,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import geometry.Circle;
 import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;
+import stack.StackDialog;
 
 import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
@@ -33,6 +35,7 @@ public class FrmDraw extends JFrame {
 	private Line line;
 	private Point startPoint;
 	private Rectangle rectangle;
+	private Circle circle;
 	/**
 	 * Launch the application.
 	 */
@@ -183,7 +186,20 @@ public class FrmDraw extends JFrame {
 						pnl.addShape(rectangle);
 						}
 					}
-					
+					if(tglbtnCircle.isSelected())
+					{
+						StackDialog dialog = new StackDialog();
+						dialog.getTxtX().setText(String.valueOf(x));
+						dialog.getTxtY().setText(String.valueOf(y));
+						dialog.setVisible(true);
+						
+						if(dialog.isOk())
+						{
+							circle = dialog.getCircle();
+							pnl.addShape(circle);
+						}
+					}
+				
 					
 				}
 			}
