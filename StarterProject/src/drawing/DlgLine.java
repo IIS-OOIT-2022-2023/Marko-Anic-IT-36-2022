@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -139,14 +140,31 @@ public class DlgLine extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						if(validateInput())
+						{
 						int x = Integer.parseInt(txtX.getText());
 						int y= Integer.parseInt(txtY.getText());
 						int xSec = Integer.parseInt(txtX2.getText());
 						int ySec = Integer.parseInt(txtY2.getText());
+						if(x >= 0 && y >= 0 && xSec >= 0 && ySec >= 0)
+						{
 						line = new Line(new Point(x,y),new Point(xSec,ySec));
 						isOk=true;
 						dispose();
-					}
+						}
+						else
+							JOptionPane.showMessageDialog(DlgLine.this,
+		                            "Coordinates can not be less than 0!",
+		                            "Error!",
+		                            JOptionPane.ERROR_MESSAGE);
+						
+						}
+						else
+							JOptionPane.showMessageDialog(DlgLine.this,
+		                            "Please fill in all fields with correct values.",
+		                            "Error!",
+		                            JOptionPane.ERROR_MESSAGE);
+						}
 				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
@@ -189,4 +207,16 @@ public class DlgLine extends JDialog {
 	{
 		return this.isOk;
 	}
+	private boolean validateInput() {
+        String xText = txtX.getText();
+        String yText = txtY.getText();
+        String x2Text = txtX2.getText();
+        String y2Text = txtY2.getText();
+        
+        return !xText.isEmpty() && !yText.isEmpty() && !x2Text.isEmpty() && !y2Text.isEmpty() 
+        		&& isNumeric(xText) && isNumeric(yText) && isNumeric(x2Text) && isNumeric(y2Text); 
+    }
+	  private boolean isNumeric(String str) {
+	        return str.matches("-?\\d+(\\.\\d+)?");
+	    }
 }

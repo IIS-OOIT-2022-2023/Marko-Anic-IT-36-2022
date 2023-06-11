@@ -1,6 +1,8 @@
 package drawing;
 
 import geometry.Point;
+import stack.StackDialog;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -10,6 +12,7 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -97,11 +100,25 @@ public class DlgPoint extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						int x = Integer.parseInt(txtX.getText());
-						int y= Integer.parseInt(txtY.getText());
+						if(validateInput())
+						{
+							int x = Integer.parseInt(txtX.getText());
+							int y= Integer.parseInt(txtY.getText());
+						if(x>=0 && y>=0)
+						{
 						point= new Point(x,y);
 						isOk=true;
 						dispose();
+						}
+						else {
+							JOptionPane.showMessageDialog(DlgPoint.this, "Coordinates can not be less than 0!","Error",JOptionPane.ERROR_MESSAGE);
+						}
+						}
+						else
+							JOptionPane.showMessageDialog(DlgPoint.this,
+		                            "Please fill in all fields with correct values.",
+		                            "Error!",
+		                            JOptionPane.ERROR_MESSAGE);
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -142,5 +159,15 @@ public class DlgPoint extends JDialog {
 	public void setOk(boolean isOk) {
 		this.isOk = isOk;
 	}
+	private boolean validateInput() {
+        String xText = txtX.getText();
+        String yText = txtY.getText();
+        
+        return !xText.isEmpty() && !yText.isEmpty() && isNumeric(xText) && isNumeric(yText);
+    }
+	  private boolean isNumeric(String str) {
+	        return str.matches("-?\\d+(\\.\\d+)?");
+	    }
+
 
 }
