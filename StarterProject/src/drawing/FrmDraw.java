@@ -28,6 +28,7 @@ public class FrmDraw extends JFrame {
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
+	private Point point;
 	private Point startPoint;
 	/**
 	 * Launch the application.
@@ -129,20 +130,35 @@ public class FrmDraw extends JFrame {
 				int y = e.getY();
 				if(tglbtnDraw.isSelected())
 				{
+					
 					if(tglbtnPoint.isSelected())
-						pnl.addShape(new Point(x,y));
+					{
+						DlgPoint dialog = new DlgPoint();
+						dialog.getTxtX().setText(String.valueOf(x));
+						dialog.getTxtY().setText(String.valueOf(y));
+						dialog.setVisible(true);
+						if(dialog.isOk())
+						{
+							point = dialog.getPoint();
+							pnl.addShape(point);
+						}
+					}
+					
 					if(tglbtnLine.isSelected())
 					{
 						 if (startPoint == null) {
 			                    startPoint = new Point(x, y);
-			                } else {
+			                } 
+						 else {
 			                    
 			                    Point endPoint = new Point(x, y);
 			                    pnl.addShape(new Line(startPoint, endPoint));
-			             
 			                    startPoint = null;
 			                }
 					}
+					
+					
+					
 				}
 			}
 		});

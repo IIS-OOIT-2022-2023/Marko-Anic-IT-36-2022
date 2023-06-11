@@ -22,6 +22,7 @@ public class DlgPoint extends JDialog {
 	private JTextField txtX;
 	private JTextField txtY;
 	private Point point;
+	private boolean isOk =false;
 	/**
 	 * Launch the application.
 	 */
@@ -99,6 +100,7 @@ public class DlgPoint extends JDialog {
 						int x = Integer.parseInt(txtX.getText());
 						int y= Integer.parseInt(txtY.getText());
 						point= new Point(x,y);
+						isOk=true;
 						dispose();
 					}
 				});
@@ -108,6 +110,12 @@ public class DlgPoint extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						isOk =false;
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
@@ -116,6 +124,23 @@ public class DlgPoint extends JDialog {
 	public Point getPoint()
 	{
 		return this.point;
+	}
+
+	public JTextField getTxtX() {
+		return txtX;
+	}
+
+
+	public JTextField getTxtY() {
+		return txtY;
+	}
+
+	public boolean isOk() {
+		return isOk;
+	}
+
+	public void setOk(boolean isOk) {
+		this.isOk = isOk;
 	}
 
 }
