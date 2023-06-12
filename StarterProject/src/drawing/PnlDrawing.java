@@ -43,18 +43,18 @@ public class PnlDrawing extends JPanel {
 			Shape shape = it.next();
 
 			if (shape.contains(x, y)) {
-				lastShape = shape;
+				lastShape = shape; // Store the shape that contains the clicked point
 			}
 
-			shape.setSelected(false);
+			shape.setSelected(false);// Deselect all shapes
 		}
 
 		if (lastShape != null) {
-			lastShape.setSelected(true);
+			lastShape.setSelected(true);// Select the last shape that contains the clicked point
 
 		}
 
-		repaint();
+		repaint(); // Redraw the shapes
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class PnlDrawing extends JPanel {
 		while (it.hasNext()) {
 			Shape shape = it.next();
 
-			shape.draw(g);
+			shape.draw(g); // Draw each shape
 		}
 
 	}
@@ -78,9 +78,8 @@ public class PnlDrawing extends JPanel {
 	}
 
 	public void removeShape(Shape shape) {
-		// TODO Auto-generated method stub
-		shapes.remove(shape);
-		lastShape = null;
+		shapes.remove(shape); // Removing shape from list
+		lastShape = null; // Set the lastShape variable to null, since the shape has been removed
 	}
 
 }

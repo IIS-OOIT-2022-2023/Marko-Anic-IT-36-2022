@@ -123,11 +123,12 @@ public class StackDialog extends JDialog {
 				JButton btnOk = new JButton("Ok");
 				btnOk.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						//if input has not characters or empty spaces
 						if (validateInput()) {
 							int x = Integer.parseInt(txtX.getText());
 							int y = Integer.parseInt(txtY.getText());
 							int radius = Integer.parseInt(txtRadius.getText());
-							// JOptionPane.showMessageDialog(null,radius);
+							
 							if (radius > 0) {
 								circle = new Circle(new Point(x, y), radius);
 								isOk = true;

@@ -14,6 +14,7 @@ public class Circle extends Shape {
 	public Circle(Point center, int radius) {
 		this.center = center;
 		this.radius = radius;
+		//setRadius(radius);
 	}
 
 	public Circle(Point center, int radius, boolean selected) {

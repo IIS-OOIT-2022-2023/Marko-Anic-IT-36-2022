@@ -61,6 +61,7 @@ public class FrmSort extends JFrame {
 		circleListModel = new DefaultListModel<>();
 		circleList = new JList<>(circleListModel);
 		circleList.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//display of objects changed to show area
 		circleList.setCellRenderer(new DefaultListCellRenderer() {
 			@Override
 			public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
@@ -105,10 +106,11 @@ public class FrmSort extends JFrame {
 				dialog = new StackDialog();
 				dialog.setVisible(true);
 
-				Circle circle = dialog.getCircle();
-				if (circle != null)
+				if (dialog.isOk()) {
+					//taking circle from dialog and adding to DefaultListModel
+					Circle circle = dialog.getCircle();
 					circleListModel.addElement(circle);
-
+				}
 			}
 		});
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -122,16 +124,18 @@ public class FrmSort extends JFrame {
 		JButton btnSort = new JButton("Sort");
 		btnSort.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				
 				if (!circleListModel.isEmpty()) {
-
+					
+					//converting DefaultListModel to ArrayList
 					List<Circle> circles = new ArrayList<>();
 					for (int i = 0; i < circleListModel.size(); i++) {
 						circles.add(circleListModel.getElementAt(i));
 					}
-
+					//compareTo method for sorting
 					Collections.sort(circles);
-
+					
+					//clearing DefaultListModel for adding new sorted elements
 					circleListModel.clear();
 					for (Circle circle : circles) {
 						circleListModel.addElement(circle);

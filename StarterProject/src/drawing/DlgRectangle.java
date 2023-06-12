@@ -184,7 +184,9 @@ public class DlgRectangle extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						//checking for characters or empty spaces in textfields
 						if (validateInput()) {
+							//getting values from textfields
 							int x = Integer.parseInt(txtX.getText());
 							int y = Integer.parseInt(txtY.getText());
 							int width = Integer.parseInt(txtWidth.getText());
@@ -211,7 +213,6 @@ public class DlgRectangle extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						isOk = false;
 						dispose();
 					}
 				});

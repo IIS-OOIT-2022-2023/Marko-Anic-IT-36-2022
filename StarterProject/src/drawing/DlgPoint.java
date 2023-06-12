@@ -124,7 +124,9 @@ public class DlgPoint extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						//checking for characters or empty spaces in textfields
 						if (validateInput()) {
+							//getting values from textfields
 							int x = Integer.parseInt(txtX.getText());
 							int y = Integer.parseInt(txtY.getText());
 							if (x >= 0 && y >= 0) {

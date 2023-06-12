@@ -76,6 +76,7 @@ public class FrmMain extends JFrame {
 				dialog = new StackDialog();
 				dialog.setVisible(true);
 				if (dialog.isOk()) {
+					//Taking circle from dialog and adding on first position in list
 					Circle circle = dialog.getCircle();
 					circleListModel.add(0, circle);
 				}
@@ -95,15 +96,17 @@ public class FrmMain extends JFrame {
 				dialog = new StackDialog();
 				dialog.setTitle("Delete circle");
 				if (!circleListModel.isEmpty()) {
-
+					//circle at first position
 					Circle circle = circleListModel.get(0);
+					//setting values to JTextFields
 					dialog.getTxtX().setText(String.valueOf(circle.getCenter().getX()));
 					dialog.getTxtY().setText(String.valueOf(circle.getCenter().getY()));
 					dialog.getTxtRadius().setText(String.valueOf(circle.getRadius()));
-
+					dialog.setTitle("Delete circle");
 					dialog.setVisible(true);
 
 					if (dialog.isOk()) {
+						//popping circle from stack
 						circleListModel.remove(0);
 					}
 				} else {

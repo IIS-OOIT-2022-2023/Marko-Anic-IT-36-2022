@@ -131,6 +131,7 @@ public class DlgCircle extends JDialog {
 			btnEdgeColor = new JButton("Edge color");
 			btnEdgeColor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+
 					edgeColor = JColorChooser.showDialog(DlgCircle.this, "Choose a Color", Color.BLACK);
 					btnEdgeColor.setForeground(edgeColor);
 				}
@@ -165,11 +166,12 @@ public class DlgCircle extends JDialog {
 				JButton btnOk = new JButton("Ok");
 				btnOk.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						// Checking for characters or empty textfields
 						if (validateInput()) {
 							int x = Integer.parseInt(txtX.getText());
 							int y = Integer.parseInt(txtY.getText());
 							int radius = Integer.parseInt(txtRadius.getText());
-							// JOptionPane.showMessageDialog(null,radius);
+
 							if (x >= 0 && y >= 0 && radius > 0) {
 								circle = new Circle(new Point(x, y), radius);
 								isOk = true;
