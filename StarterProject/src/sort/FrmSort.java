@@ -36,6 +36,7 @@ public class FrmSort extends JFrame {
 	private DefaultListModel<Circle> circleListModel;
 	private JList<Circle> circleList;
 	private StackDialog dialog;
+
 	/**
 	 * Launch the application.
 	 */
@@ -56,23 +57,24 @@ public class FrmSort extends JFrame {
 	 * Create the frame.
 	 */
 	public FrmSort() {
-		
+
 		circleListModel = new DefaultListModel<>();
 		circleList = new JList<>(circleListModel);
 		circleList.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		circleList.setCellRenderer(new DefaultListCellRenderer() {
-		    @Override
-		    public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-		        super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+			@Override
+			public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
+					boolean cellHasFocus) {
+				super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 
-		        if (value instanceof Circle) {
-		            Circle circle = (Circle) value;
-		            String text = circle.toString() + ", area: " + circle.area();
-		            setText(text);
-		        }
+				if (value instanceof Circle) {
+					Circle circle = (Circle) value;
+					String text = circle.toString() + ", area: " + circle.area();
+					setText(text);
+				}
 
-		        return this;
-		    }
+				return this;
+			}
 		});
 
 		setTitle("Marko Anić IT-36/2022");
@@ -83,13 +85,12 @@ public class FrmSort extends JFrame {
 
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWidths = new int[] { 0, 0, 0 };
+		gbl_contentPane.rowHeights = new int[] { 0, 0, 0 };
+		gbl_contentPane.columnWeights = new double[] { 1.0, 1.0, Double.MIN_VALUE };
+		gbl_contentPane.rowWeights = new double[] { 1.0, 0.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
-		
-		
+
 		GridBagConstraints gbc_circleList = new GridBagConstraints();
 		gbc_circleList.gridwidth = 2;
 		gbc_circleList.insets = new Insets(15, 15, 15, 15);
@@ -97,18 +98,17 @@ public class FrmSort extends JFrame {
 		gbc_circleList.gridx = 0;
 		gbc_circleList.gridy = 0;
 		contentPane.add(circleList, gbc_circleList);
-		
 
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dialog = new StackDialog();
 				dialog.setVisible(true);
-				
+
 				Circle circle = dialog.getCircle();
-				if(circle!=null)
-				circleListModel.addElement(circle);
-				
+				if (circle != null)
+					circleListModel.addElement(circle);
+
 			}
 		});
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -118,28 +118,29 @@ public class FrmSort extends JFrame {
 		gbc_btnAdd.gridx = 0;
 		gbc_btnAdd.gridy = 1;
 		contentPane.add(btnAdd, gbc_btnAdd);
-		
+
 		JButton btnSort = new JButton("Sort");
 		btnSort.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				  if (!circleListModel.isEmpty()) {
-					  
-			            List<Circle> circles = new ArrayList<>();
-			            for (int i = 0; i < circleListModel.size(); i++) {
-			                circles.add(circleListModel.getElementAt(i));
-			            }
 
-			            Collections.sort(circles);
+				if (!circleListModel.isEmpty()) {
 
-			            circleListModel.clear();
-			            for (Circle circle : circles) {
-			                circleListModel.addElement(circle);
-			            }
-			            
-			        } else {
-			            JOptionPane.showMessageDialog(FrmSort.this, "The list is empty!", "Error!", JOptionPane.ERROR_MESSAGE);
-			        }
+					List<Circle> circles = new ArrayList<>();
+					for (int i = 0; i < circleListModel.size(); i++) {
+						circles.add(circleListModel.getElementAt(i));
+					}
+
+					Collections.sort(circles);
+
+					circleListModel.clear();
+					for (Circle circle : circles) {
+						circleListModel.addElement(circle);
+					}
+
+				} else {
+					JOptionPane.showMessageDialog(FrmSort.this, "The list is empty!", "Error!",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		btnSort.setFont(new Font("Tahoma", Font.PLAIN, 16));

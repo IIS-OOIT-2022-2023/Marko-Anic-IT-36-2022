@@ -25,8 +25,8 @@ public class StackDialog extends JDialog {
 	private JTextField txtX;
 	private JTextField txtY;
 	private JTextField txtRadius;
-    private Circle circle;
-    private boolean isOk;
+	private Circle circle;
+	private boolean isOk;
 
 	/**
 	 * Launch the application.
@@ -44,8 +44,8 @@ public class StackDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-public StackDialog() {
-		isOk=false;
+	public StackDialog() {
+		isOk = false;
 		setTitle("Add circle");
 		setModal(true);
 		setBounds(100, 100, 450, 300);
@@ -53,10 +53,10 @@ public StackDialog() {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[] {60, 40, 40};
-		gbl_contentPanel.rowHeights = new int[] {30, 0, 30, 0, 30, 0, 30, 30, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		gbl_contentPanel.columnWidths = new int[] { 60, 40, 40 };
+		gbl_contentPanel.rowHeights = new int[] { 30, 0, 30, 0, 30, 0, 30, 30, 0 };
+		gbl_contentPanel.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
+		gbl_contentPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 		contentPanel.setLayout(gbl_contentPanel);
 		{
 			JLabel lblX = new JLabel("X:");
@@ -124,33 +124,30 @@ public StackDialog() {
 				btnOk.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (validateInput()) {
-		                    int x = Integer.parseInt(txtX.getText());
-		                    int y = Integer.parseInt(txtY.getText());
-		                    int radius = Integer.parseInt(txtRadius.getText());
-		                   // JOptionPane.showMessageDialog(null,radius);
-		                    if(radius >0)
-		                    {
-		                    	circle = new Circle(new Point(x,y), radius);
-		                    	isOk=true;
-		                    	dispose();
-		                    }
-		                    else
-		                    	JOptionPane.showMessageDialog(StackDialog.this,"The radius cannot be less than 0.","Greška",JOptionPane.ERROR_MESSAGE);
-		                } 
-						else {
-		                    JOptionPane.showMessageDialog(StackDialog.this,
-		                            "Please fill in all fields with correct values.",
-		                            "Error!",
-		                            JOptionPane.ERROR_MESSAGE);
-		                }
-		            }	
+							int x = Integer.parseInt(txtX.getText());
+							int y = Integer.parseInt(txtY.getText());
+							int radius = Integer.parseInt(txtRadius.getText());
+							// JOptionPane.showMessageDialog(null,radius);
+							if (radius > 0) {
+								circle = new Circle(new Point(x, y), radius);
+								isOk = true;
+								dispose();
+							} else
+								JOptionPane.showMessageDialog(StackDialog.this, "The radius cannot be less than 0.",
+										"Greška", JOptionPane.ERROR_MESSAGE);
+						} else {
+							JOptionPane.showMessageDialog(StackDialog.this,
+									"Please fill in all fields with correct values.", "Error!",
+									JOptionPane.ERROR_MESSAGE);
+						}
+					}
 				});
 				btnOk.setActionCommand("OK");
 				buttonPane.add(btnOk);
 				getRootPane().setDefaultButton(btnOk);
 			}
 			{
-			 JButton btnCancel = new JButton("Cancel");
+				JButton btnCancel = new JButton("Cancel");
 				btnCancel.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
@@ -161,7 +158,6 @@ public StackDialog() {
 			}
 		}
 	}
-
 
 	public JTextField getTxtX() {
 		return txtX;
@@ -186,30 +182,30 @@ public StackDialog() {
 	public void setTxtRadius(JTextField txtRadius) {
 		this.txtRadius = txtRadius;
 	}
-	 public Circle getCircle() {
-	        return circle;
-	    }
-	public boolean isOk()
-	{
+
+	public Circle getCircle() {
+		return circle;
+	}
+
+	public boolean isOk() {
 		return this.isOk;
 	}
-	public void setOk(boolean isOk)
-	{
+
+	public void setOk(boolean isOk) {
 		this.isOk = isOk;
 	}
+
 	private boolean validateInput() {
-        String xText = txtX.getText();
-        String yText = txtY.getText();
-        String radiusText = txtRadius.getText();
-        
-        return !xText.isEmpty() && !yText.isEmpty() && !radiusText.isEmpty()
-                && isNumeric(xText) && isNumeric(yText) && isNumeric(radiusText);
-    }
-	  private boolean isNumeric(String str) {
-	        return str.matches("-?\\d+(\\.\\d+)?");
-	    }
+		String xText = txtX.getText();
+		String yText = txtY.getText();
+		String radiusText = txtRadius.getText();
 
+		return !xText.isEmpty() && !yText.isEmpty() && !radiusText.isEmpty() && isNumeric(xText) && isNumeric(yText)
+				&& isNumeric(radiusText);
+	}
 
-	
+	private boolean isNumeric(String str) {
+		return str.matches("-?\\d+(\\.\\d+)?");
+	}
 
 }

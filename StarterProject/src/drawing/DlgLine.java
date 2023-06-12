@@ -32,7 +32,7 @@ public class DlgLine extends JDialog {
 	private Line line;
 	private Color color;
 	private JButton btnColor;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -50,18 +50,19 @@ public class DlgLine extends JDialog {
 	 * Create the dialog.
 	 */
 	public DlgLine() {
-		isOk =false;
-		color= Color.black;
+		setTitle("Add line");
+		isOk = false;
+		color = Color.black;
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[] {60, 40, 40};
-		gbl_contentPanel.rowHeights = new int[] {30, 0, 30, 0, 30, 0, 0, 30, 30, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		gbl_contentPanel.columnWidths = new int[] { 60, 40, 40 };
+		gbl_contentPanel.rowHeights = new int[] { 30, 0, 30, 0, 30, 0, 0, 30, 30, 0 };
+		gbl_contentPanel.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
+		gbl_contentPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 		contentPanel.setLayout(gbl_contentPanel);
 		{
 			JLabel lblX = new JLabel("X:");
@@ -161,31 +162,24 @@ public class DlgLine extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(validateInput())
-						{
-						int x = Integer.parseInt(txtX.getText());
-						int y= Integer.parseInt(txtY.getText());
-						int xSec = Integer.parseInt(txtX2.getText());
-						int ySec = Integer.parseInt(txtY2.getText());
-						if(x >= 0 && y >= 0 && xSec >= 0 && ySec >= 0)
-						{
-						line = new Line(new Point(x,y),new Point(xSec,ySec));
-						isOk=true;
-						dispose();
-						}
-						else
+						if (validateInput()) {
+							int x = Integer.parseInt(txtX.getText());
+							int y = Integer.parseInt(txtY.getText());
+							int xSec = Integer.parseInt(txtX2.getText());
+							int ySec = Integer.parseInt(txtY2.getText());
+							if (x >= 0 && y >= 0 && xSec >= 0 && ySec >= 0) {
+								line = new Line(new Point(x, y), new Point(xSec, ySec));
+								isOk = true;
+								dispose();
+							} else
+								JOptionPane.showMessageDialog(DlgLine.this, "Coordinates can not be less than 0!",
+										"Error!", JOptionPane.ERROR_MESSAGE);
+
+						} else
 							JOptionPane.showMessageDialog(DlgLine.this,
-		                            "Coordinates can not be less than 0!",
-		                            "Error!",
-		                            JOptionPane.ERROR_MESSAGE);
-						
-						}
-						else
-							JOptionPane.showMessageDialog(DlgLine.this,
-		                            "Please fill in all fields with correct values.",
-		                            "Error!",
-		                            JOptionPane.ERROR_MESSAGE);
-						}
+									"Please fill in all fields with correct values.", "Error!",
+									JOptionPane.ERROR_MESSAGE);
+					}
 				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
@@ -195,7 +189,7 @@ public class DlgLine extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						isOk =false;
+						isOk = false;
 						dispose();
 					}
 				});
@@ -220,35 +214,37 @@ public class DlgLine extends JDialog {
 	public JTextField getTxtY2() {
 		return txtY2;
 	}
-	public Line getLine()
-	{
+
+	public Line getLine() {
 		return this.line;
 	}
-	public boolean isOk()
-	{
+
+	public boolean isOk() {
 		return this.isOk;
 	}
-	public Color getColor()
-	{
+
+	public Color getColor() {
 		return this.color;
 	}
-	public void setColor(Color color)
-	{
+
+	public void setColor(Color color) {
 		this.color = color;
 		btnColor.setForeground(color);
 	}
+
 	private boolean validateInput() {
-        String xText = txtX.getText();
-        String yText = txtY.getText();
-        String x2Text = txtX2.getText();
-        String y2Text = txtY2.getText();
-        
-        return !xText.isEmpty() && !yText.isEmpty() && !x2Text.isEmpty() && !y2Text.isEmpty() 
-        		&& isNumeric(xText) && isNumeric(yText) && isNumeric(x2Text) && isNumeric(y2Text); 
-    }
-	  private boolean isNumeric(String str) {
-	        return str.matches("-?\\d+(\\.\\d+)?");
-	    }
+		String xText = txtX.getText();
+		String yText = txtY.getText();
+		String x2Text = txtX2.getText();
+		String y2Text = txtY2.getText();
+
+		return !xText.isEmpty() && !yText.isEmpty() && !x2Text.isEmpty() && !y2Text.isEmpty() && isNumeric(xText)
+				&& isNumeric(yText) && isNumeric(x2Text) && isNumeric(y2Text);
+	}
+
+	private boolean isNumeric(String str) {
+		return str.matches("-?\\d+(\\.\\d+)?");
+	}
 
 	public void setLine(Line line) {
 		this.line = line;

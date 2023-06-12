@@ -36,8 +36,8 @@ import java.awt.event.ActionEvent;
 public class FrmDraw extends JFrame {
 
 	private JPanel contentPane;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
+	private final ButtonGroup btnGroupShapes = new ButtonGroup();
+	private final ButtonGroup btnGroupOptions = new ButtonGroup();
 	private JButton btnModify;
 	private JButton btnDelete;
 	private Point point;
@@ -50,6 +50,7 @@ public class FrmDraw extends JFrame {
 	private Color bgColor;
 	private PnlDrawing pnl;
 	private Shape shape;
+
 	/**
 	 * Launch the application.
 	 */
@@ -83,116 +84,117 @@ public class FrmDraw extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
-		JPanel panel = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
-		flowLayout.setAlignment(FlowLayout.RIGHT);
-		flowLayout.setHgap(54);
-		contentPane.add(panel, BorderLayout.NORTH);
-		
+
+		JPanel pnlShapes = new JPanel();
+		FlowLayout fl_pnlShapes = (FlowLayout) pnlShapes.getLayout();
+		fl_pnlShapes.setAlignment(FlowLayout.RIGHT);
+		fl_pnlShapes.setHgap(54);
+		contentPane.add(pnlShapes, BorderLayout.NORTH);
+
 		JToggleButton tglbtnPoint = new JToggleButton("Point");
 		tglbtnPoint.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonGroup.add(tglbtnPoint);
-		panel.add(tglbtnPoint);
-		
+		btnGroupShapes.add(tglbtnPoint);
+		pnlShapes.add(tglbtnPoint);
+
 		JToggleButton tglbtnLine = new JToggleButton("Line");
 		tglbtnLine.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonGroup.add(tglbtnLine);
-		panel.add(tglbtnLine);
-		
+		btnGroupShapes.add(tglbtnLine);
+		pnlShapes.add(tglbtnLine);
+
 		JToggleButton tglbtnRectangle = new JToggleButton("Rectangle");
 		tglbtnRectangle.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonGroup.add(tglbtnRectangle);
-		panel.add(tglbtnRectangle);
-		
+		btnGroupShapes.add(tglbtnRectangle);
+		pnlShapes.add(tglbtnRectangle);
+
 		JToggleButton tglbtnCircle = new JToggleButton("Circle");
 		tglbtnCircle.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonGroup.add(tglbtnCircle);
-		panel.add(tglbtnCircle);
-		
+		btnGroupShapes.add(tglbtnCircle);
+		pnlShapes.add(tglbtnCircle);
+
 		JToggleButton tglbtnDonut = new JToggleButton("Donut");
 		tglbtnDonut.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonGroup.add(tglbtnDonut);
-		panel.add(tglbtnDonut);
-		
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1, BorderLayout.WEST);
-		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{115, 0};
-		gbl_panel_1.rowHeights = new int[] {0, 0, 0};
-		gbl_panel_1.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0}; 
-		panel_1.setLayout(gbl_panel_1);
-		
+		btnGroupShapes.add(tglbtnDonut);
+		pnlShapes.add(tglbtnDonut);
+
+		JPanel pnlOptions = new JPanel();
+		contentPane.add(pnlOptions, BorderLayout.WEST);
+		GridBagLayout gbl_pnlOptions = new GridBagLayout();
+		gbl_pnlOptions.columnWidths = new int[] { 115, 0 };
+		gbl_pnlOptions.rowHeights = new int[] { 0, 0, 0 };
+		gbl_pnlOptions.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
+		gbl_pnlOptions.rowWeights = new double[] { 1.0, 1.0, 1.0, 1.0 };
+		pnlOptions.setLayout(gbl_pnlOptions);
+
 		JToggleButton tglbtnDraw = new JToggleButton("Draw");
 		tglbtnDraw.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(tglbtnDraw.isSelected()) {
-				tglbtnPoint.setEnabled(true);
-				tglbtnLine.setEnabled(true);
-				tglbtnRectangle.setEnabled(true);
-				tglbtnCircle.setEnabled(true);
-				tglbtnDonut.setEnabled(true);
-
-				}
-			}
+					tglbtnPoint.setEnabled(true);
+					tglbtnLine.setEnabled(true);
+					tglbtnRectangle.setEnabled(true);
+					tglbtnCircle.setEnabled(true);
+					tglbtnDonut.setEnabled(true);
+					shape= pnl.getLastShape();
+					if(shape != null)
+					{
+						shape.setSelected(false);
+						shape=null;
+						pnl.repaint();
+					}
+					}
+			
+			
 		});
 
 		tglbtnDraw.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonGroup_1.add(tglbtnDraw);
+		btnGroupOptions.add(tglbtnDraw);
 		GridBagConstraints gbc_tglbtnDraw = new GridBagConstraints();
 		gbc_tglbtnDraw.insets = new Insets(0, 0, 5, 0);
 		gbc_tglbtnDraw.gridx = 0;
 		gbc_tglbtnDraw.gridy = 0;
-		panel_1.add(tglbtnDraw, gbc_tglbtnDraw);
-		
+		pnlOptions.add(tglbtnDraw, gbc_tglbtnDraw);
+
 		JToggleButton tglbtnSelect = new JToggleButton("Select");
 		tglbtnSelect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				buttonGroup.clearSelection();
+				btnGroupShapes.clearSelection();
 				tglbtnPoint.setEnabled(false);
 				tglbtnLine.setEnabled(false);
 				tglbtnRectangle.setEnabled(false);
 				tglbtnCircle.setEnabled(false);
 				tglbtnDonut.setEnabled(false);
-				btnModify.setEnabled(true);
-				btnDelete.setEnabled(true);
 			}
 		});
 		tglbtnSelect.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonGroup_1.add(tglbtnSelect);
+		btnGroupOptions.add(tglbtnSelect);
 		GridBagConstraints gbc_tglbtnSelect = new GridBagConstraints();
 		gbc_tglbtnSelect.insets = new Insets(0, 0, 5, 0);
 		gbc_tglbtnSelect.gridx = 0;
 		gbc_tglbtnSelect.gridy = 1;
-		panel_1.add(tglbtnSelect, gbc_tglbtnSelect);
-		
-		
+		pnlOptions.add(tglbtnSelect, gbc_tglbtnSelect);
+
 		btnModify.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				shape = pnl.getLastShape();
-				if(shape!=null)
-				{
-					if(shape instanceof Donut)
-					{
-						Donut donutShape = (Donut) shape;
-			            DlgDonut dialog = new DlgDonut();
-			            dialog.getTxtX().setText(String.valueOf(donutShape.getCenter().getX()));
-			            dialog.getTxtY().setText(String.valueOf(donutShape.getCenter().getY()));
-			            dialog.getTxtRadius().setText(String.valueOf(donutShape.getRadius()));
-			            dialog.getTxtInnerRadius().setText(String.valueOf(donutShape.getInnerRadius()));
 
-			            dialog.setEdgeColor(donutShape.getEdgeColor());
-			            dialog.setBgColor(donutShape.getBgColor());
-			            dialog.setVisible(true);
-			            if(dialog.isOk())
-			            {
+				shape = pnl.getLastShape();
+				if (shape != null) {
+					if (shape instanceof Donut) {
+						Donut donutShape = (Donut) shape;
+						DlgDonut dialog = new DlgDonut();
+						dialog.setTitle("Modify donut");
+						dialog.getTxtX().setText(String.valueOf(donutShape.getCenter().getX()));
+						dialog.getTxtY().setText(String.valueOf(donutShape.getCenter().getY()));
+						dialog.getTxtRadius().setText(String.valueOf(donutShape.getRadius()));
+						dialog.getTxtInnerRadius().setText(String.valueOf(donutShape.getInnerRadius()));
+
+						dialog.setEdgeColor(donutShape.getEdgeColor());
+						dialog.setBgColor(donutShape.getBgColor());
+						dialog.setVisible(true);
+						if (dialog.isOk()) {
 							int x = Integer.parseInt(dialog.getTxtX().getText());
-							int y= Integer.parseInt(dialog.getTxtY().getText());
+							int y = Integer.parseInt(dialog.getTxtY().getText());
 							int radius = Integer.parseInt(dialog.getTxtRadius().getText());
 							int innerRadius = Integer.parseInt(dialog.getTxtInnerRadius().getText());
-							donutShape.setCenter(new Point(x,y));
+							donutShape.setCenter(new Point(x, y));
 							try {
 								donutShape.setRadius(radius);
 							} catch (Exception e1) {
@@ -207,78 +209,74 @@ public class FrmDraw extends JFrame {
 							donutShape.setEdgeColor(dialog.getEdgeColor());
 							donutShape.setBgColor(dialog.getBgColor());
 							pnl.repaint();
-			            }
-					}
-					else
-						if(shape instanceof Circle)
-						{
-							 Circle circleShape = (Circle) shape;
-					            DlgCircle dialog = new DlgCircle();
-					            dialog.getTxtX().setText(String.valueOf(circleShape.getCenter().getX()));
-					            dialog.getTxtY().setText(String.valueOf(circleShape.getCenter().getY()));
-					            dialog.getTxtRadius().setText(String.valueOf(circleShape.getRadius()));
-					            dialog.setEdgeColor(circleShape.getEdgeColor());
-					            dialog.setBgColor(circleShape.getBgColor());
-					            dialog.setVisible(true);
-					            if(dialog.isOk())
-					            {
-									int x = Integer.parseInt(dialog.getTxtX().getText());
-									int y= Integer.parseInt(dialog.getTxtY().getText());
-									int radius = Integer.parseInt(dialog.getTxtRadius().getText());
-									circleShape.setCenter(new Point(x,y));
-									try {
-										circleShape.setRadius(radius);
-									} catch (Exception e1) {
-										e1.printStackTrace();
-									}
-									circleShape.setEdgeColor(dialog.getEdgeColor());
-									circleShape.setBgColor(dialog.getBgColor());
-									pnl.repaint();
-					            }
 						}
-					
-					
-					if(shape instanceof Point)
-					{
-					      Point pointShape = (Point) shape;
-				            DlgPoint dialog = new DlgPoint();
-				            dialog.getTxtX().setText(String.valueOf(pointShape.getX()));
-				            dialog.getTxtY().setText(String.valueOf(pointShape.getY()));
-				            dialog.setColor(pointShape.getEdgeColor());
-				            dialog.setVisible(true);
-				            if (dialog.isOk()) {
-				            	pointShape.setX(Integer.parseInt(dialog.getTxtX().getText()));
-				                pointShape.setY(Integer.parseInt(dialog.getTxtY().getText()));
-				                pointShape.setEdgeColor(dialog.getColor());
-				                pnl.repaint();
-				            }
+					} else if (shape instanceof Circle) {
+						Circle circleShape = (Circle) shape;
+						DlgCircle dialog = new DlgCircle();
+						dialog.setTitle("Modify circle");
+						dialog.getTxtX().setText(String.valueOf(circleShape.getCenter().getX()));
+						dialog.getTxtY().setText(String.valueOf(circleShape.getCenter().getY()));
+						dialog.getTxtRadius().setText(String.valueOf(circleShape.getRadius()));
+						dialog.setEdgeColor(circleShape.getEdgeColor());
+						dialog.setBgColor(circleShape.getBgColor());
+						dialog.setVisible(true);
+						if (dialog.isOk()) {
+							int x = Integer.parseInt(dialog.getTxtX().getText());
+							int y = Integer.parseInt(dialog.getTxtY().getText());
+							int radius = Integer.parseInt(dialog.getTxtRadius().getText());
+							circleShape.setCenter(new Point(x, y));
+							try {
+								circleShape.setRadius(radius);
+							} catch (Exception e1) {
+								e1.printStackTrace();
+							}
+							circleShape.setEdgeColor(dialog.getEdgeColor());
+							circleShape.setBgColor(dialog.getBgColor());
+							pnl.repaint();
+						}
 					}
-					if(shape instanceof Line)
-					{
-						 Line lineShape = (Line)shape;
-				            DlgLine dialog = new DlgLine();
-				            dialog.getTxtX().setText(String.valueOf(lineShape.getStartPoint().getX()));
-				            dialog.getTxtY().setText(String.valueOf(lineShape.getStartPoint().getY()));
-				            dialog.getTxtX2().setText(String.valueOf(lineShape.getEndPoint().getX()));
-				            dialog.getTxtY2().setText(String.valueOf(lineShape.getEndPoint().getY()));
-				            dialog.setColor(lineShape.getEdgeColor());
-				            
-				            dialog.setVisible(true);
-				            if (dialog.isOk()) {
-				            	int x = Integer.parseInt(dialog.getTxtX().getText());
-								int y= Integer.parseInt(dialog.getTxtY().getText());
-								int xSec = Integer.parseInt(dialog.getTxtX2().getText());
-								int ySec = Integer.parseInt(dialog.getTxtY2().getText());
-				            	lineShape.setStartPoint(new Point(x,y));
-				            	lineShape.setEndPoint(new Point(xSec,ySec));
-				                lineShape.setEdgeColor(dialog.getColor());
-				                pnl.repaint();
-				            }
+
+					if (shape instanceof Point) {
+						Point pointShape = (Point) shape;
+						DlgPoint dialog = new DlgPoint();
+						dialog.setTitle("Modify point");
+						dialog.getTxtX().setText(String.valueOf(pointShape.getX()));
+						dialog.getTxtY().setText(String.valueOf(pointShape.getY()));
+						dialog.setColor(pointShape.getEdgeColor());
+						dialog.setVisible(true);
+						if (dialog.isOk()) {
+							pointShape.setX(Integer.parseInt(dialog.getTxtX().getText()));
+							pointShape.setY(Integer.parseInt(dialog.getTxtY().getText()));
+							pointShape.setEdgeColor(dialog.getColor());
+							pnl.repaint();
+						}
 					}
-					if(shape instanceof Rectangle)
-					{
+					if (shape instanceof Line) {
+						Line lineShape = (Line) shape;
+						DlgLine dialog = new DlgLine();
+						dialog.setTitle("Modify line");
+						dialog.getTxtX().setText(String.valueOf(lineShape.getStartPoint().getX()));
+						dialog.getTxtY().setText(String.valueOf(lineShape.getStartPoint().getY()));
+						dialog.getTxtX2().setText(String.valueOf(lineShape.getEndPoint().getX()));
+						dialog.getTxtY2().setText(String.valueOf(lineShape.getEndPoint().getY()));
+						dialog.setColor(lineShape.getEdgeColor());
+
+						dialog.setVisible(true);
+						if (dialog.isOk()) {
+							int x = Integer.parseInt(dialog.getTxtX().getText());
+							int y = Integer.parseInt(dialog.getTxtY().getText());
+							int xSec = Integer.parseInt(dialog.getTxtX2().getText());
+							int ySec = Integer.parseInt(dialog.getTxtY2().getText());
+							lineShape.setStartPoint(new Point(x, y));
+							lineShape.setEndPoint(new Point(xSec, ySec));
+							lineShape.setEdgeColor(dialog.getColor());
+							pnl.repaint();
+						}
+					}
+					if (shape instanceof Rectangle) {
 						Rectangle recShape = (Rectangle) shape;
 						DlgRectangle dialog = new DlgRectangle();
+						dialog.setTitle("Modify rectangle");
 						dialog.getTxtX().setText(String.valueOf(recShape.getUpperLeftPoint().getX()));
 						dialog.getTxtY().setText(String.valueOf(recShape.getUpperLeftPoint().getY()));
 						dialog.getTxtWidth().setText(String.valueOf(recShape.getWidth()));
@@ -286,14 +284,13 @@ public class FrmDraw extends JFrame {
 						dialog.setBgColor(recShape.getBgColor());
 						dialog.setEdgeColor(recShape.getEdgeColor());
 						dialog.setVisible(true);
-						if(dialog.isOk())
-						{
+						if (dialog.isOk()) {
 							int x = Integer.parseInt(dialog.getTxtX().getText());
-							int y= Integer.parseInt(dialog.getTxtY().getText());
+							int y = Integer.parseInt(dialog.getTxtY().getText());
 							int width = Integer.parseInt(dialog.getTxtWidth().getText());
 							int height = Integer.parseInt(dialog.getTxtHeight().getText());
-							
-							recShape.setUpperLeftPoint(new Point(x,y));
+
+							recShape.setUpperLeftPoint(new Point(x, y));
 							recShape.setWidth(width);
 							recShape.setHeight(height);
 							recShape.setEdgeColor(dialog.getEdgeColor());
@@ -301,155 +298,141 @@ public class FrmDraw extends JFrame {
 							pnl.repaint();
 						}
 					}
-					
-					
-					
-				}
-				else
-					JOptionPane.showMessageDialog(FrmDraw.this,"Select shape to modify!", "Information", JOptionPane.INFORMATION_MESSAGE);
-				
+
+				} else
+					JOptionPane.showMessageDialog(FrmDraw.this, "Select shape to modify!", "Information",
+							JOptionPane.INFORMATION_MESSAGE);
+
 			}
 		});
 		btnModify.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonGroup_1.add(btnModify);
+		btnGroupOptions.add(btnModify);
 		GridBagConstraints gbc_btnModify = new GridBagConstraints();
 		gbc_btnModify.insets = new Insets(0, 0, 5, 0);
 		gbc_btnModify.gridx = 0;
 		gbc_btnModify.gridy = 2;
-		panel_1.add(btnModify, gbc_btnModify);
-		
-	
+		pnlOptions.add(btnModify, gbc_btnModify);
+
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				shape = pnl.getLastShape();
-					if(shape!=null) {
-				int choice = JOptionPane.showConfirmDialog(FrmDraw.this, "Are you sure you want to delete the selected shape?", "Confirmation", JOptionPane.YES_NO_OPTION);
+				if (shape != null) {
+					int choice = JOptionPane.showConfirmDialog(FrmDraw.this,
+							"Are you sure you want to delete the selected shape?", "Confirmation",
+							JOptionPane.YES_NO_OPTION);
 
-	            if (choice == JOptionPane.YES_OPTION) {
-	                pnl.removeShape(shape);
-	                pnl.repaint();
-	            }
+					if (choice == JOptionPane.YES_OPTION) {
+						pnl.removeShape(shape);
+						pnl.repaint();
 					}
-					else
-						JOptionPane.showMessageDialog(FrmDraw.this,"Select shape to delete!", "Information", JOptionPane.INFORMATION_MESSAGE);
-					
+				} else
+					JOptionPane.showMessageDialog(FrmDraw.this, "Select shape to delete!", "Information",
+							JOptionPane.INFORMATION_MESSAGE);
+
 			}
 		});
 		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonGroup_1.add(btnDelete);
+		btnGroupOptions.add(btnDelete);
 		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
 		gbc_btnDelete.insets = new Insets(0, 0, 5, 0);
 		gbc_btnDelete.gridx = 0;
 		gbc_btnDelete.gridy = 3;
-		panel_1.add(btnDelete, gbc_btnDelete);
+		pnlOptions.add(btnDelete, gbc_btnDelete);
 		tglbtnPoint.setEnabled(false);
 		tglbtnLine.setEnabled(false);
 		tglbtnRectangle.setEnabled(false);
 		tglbtnCircle.setEnabled(false);
 		tglbtnDonut.setEnabled(false);
-		
+
 		pnl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int x = e.getX();
 				int y = e.getY();
-				
-				if(tglbtnDraw.isSelected())
-				{
-	
-					if(tglbtnPoint.isSelected())
-					{
+
+				if (tglbtnDraw.isSelected()) {
+
+					if (tglbtnPoint.isSelected()) {
 						DlgPoint dialog = new DlgPoint();
 						dialog.getTxtX().setText(String.valueOf(x));
 						dialog.getTxtY().setText(String.valueOf(y));
 						dialog.setVisible(true);
-						if(dialog.isOk())
-						{
-								point = dialog.getPoint();
-								edgeColor = dialog.getColor();
-								pnl.addShape(point,edgeColor);
-								
+						if (dialog.isOk()) {
+							point = dialog.getPoint();
+							edgeColor = dialog.getColor();
+							pnl.addShape(point, edgeColor);
+
 						}
 					}
-					
-					if(tglbtnLine.isSelected())
-					{
-						 if (startPoint == null) {
-							
-			                  startPoint = new Point(x, y);
-			                } 
-						 else {
-							 DlgLine dialog = new DlgLine();
-							 dialog.getTxtX().setText(String.valueOf(startPoint.getX()));
-							 dialog.getTxtY().setText(String.valueOf(startPoint.getY()));
-							 dialog.getTxtX2().setText(String.valueOf(x));
-							 dialog.getTxtY2().setText(String.valueOf(y));
-							 dialog.setVisible(true);
-							 if(dialog.isOk()) 
-							 { 
-							line = dialog.getLine();
-							edgeColor=dialog.getColor();
-			                 pnl.addShape(line,edgeColor);
-							 }
-							 startPoint = null;
-			                }
+
+					if (tglbtnLine.isSelected()) {
+						if (startPoint == null) {
+
+							startPoint = new Point(x, y);
+						} else {
+							DlgLine dialog = new DlgLine();
+							dialog.getTxtX().setText(String.valueOf(startPoint.getX()));
+							dialog.getTxtY().setText(String.valueOf(startPoint.getY()));
+							dialog.getTxtX2().setText(String.valueOf(x));
+							dialog.getTxtY2().setText(String.valueOf(y));
+							dialog.setVisible(true);
+							if (dialog.isOk()) {
+								line = dialog.getLine();
+								edgeColor = dialog.getColor();
+								pnl.addShape(line, edgeColor);
+							}
+							startPoint = null;
+						}
 					}
-					
-					if(tglbtnRectangle.isSelected())
-					{
+
+					if (tglbtnRectangle.isSelected()) {
 						DlgRectangle dialog = new DlgRectangle();
 						dialog.getTxtX().setText(String.valueOf(x));
 						dialog.getTxtY().setText(String.valueOf(y));
 						dialog.setVisible(true);
-						
-						if(dialog.isOk())
-						{
-						rectangle = dialog.getRectangle();
-						edgeColor = dialog.getEdgeColor();
-						bgColor = dialog.getBgColor();
-						pnl.addShape(rectangle,edgeColor,bgColor);
+
+						if (dialog.isOk()) {
+							rectangle = dialog.getRectangle();
+							edgeColor = dialog.getEdgeColor();
+							bgColor = dialog.getBgColor();
+							pnl.addShape(rectangle, edgeColor, bgColor);
 						}
 					}
-					if(tglbtnCircle.isSelected())
-					{
+					if (tglbtnCircle.isSelected()) {
 						DlgCircle dialog = new DlgCircle();
 						dialog.getTxtX().setText(String.valueOf(x));
 						dialog.getTxtY().setText(String.valueOf(y));
 						dialog.setVisible(true);
-						
-						if(dialog.isOk())
-						{
+
+						if (dialog.isOk()) {
 							circle = dialog.getCircle();
 							edgeColor = dialog.getEdgeColor();
 							bgColor = dialog.getBgColor();
-							pnl.addShape(circle,edgeColor,bgColor);
+							pnl.addShape(circle, edgeColor, bgColor);
 						}
 					}
-					if(tglbtnDonut.isSelected())
-					{
+					if (tglbtnDonut.isSelected()) {
 						DlgDonut dialog = new DlgDonut();
-						 dialog.getTxtX().setText(String.valueOf(x));
-						 dialog.getTxtY().setText(String.valueOf(y));
-						 dialog.setVisible(true);
-						 
-						 if(dialog.isOk())
-						 {
-							 donut = dialog.getDonut();
-							 edgeColor = dialog.getEdgeColor();
-							 bgColor = dialog.getBgColor();
-							 pnl.addShape(donut,edgeColor,bgColor);
-						 }
+						dialog.getTxtX().setText(String.valueOf(x));
+						dialog.getTxtY().setText(String.valueOf(y));
+						dialog.setVisible(true);
+
+						if (dialog.isOk()) {
+							donut = dialog.getDonut();
+							edgeColor = dialog.getEdgeColor();
+							bgColor = dialog.getBgColor();
+							pnl.addShape(donut, edgeColor, bgColor);
+						}
 					}
-					
+
 				}
-				
-				if(tglbtnSelect.isSelected())
-				{
+
+				if (tglbtnSelect.isSelected()) {
 					pnl.selectShape(x, y);
 				}
 			}
 		});
-		pnl.setBackground(new Color(255,255,255));
+		pnl.setBackground(new Color(255, 255, 255));
 		contentPane.add(pnl, BorderLayout.CENTER);
 	}
 

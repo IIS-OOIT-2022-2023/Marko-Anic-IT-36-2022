@@ -31,10 +31,11 @@ public class DlgDonut extends JDialog {
 	private JTextField txtInnerRadius;
 	private JButton btnEdgeColor;
 	private JButton btnBgColor;
-	private boolean isOk ;
-    private Color edgeColor;
-    private Color bgColor;
+	private boolean isOk;
+	private Color edgeColor;
+	private Color bgColor;
 	private Donut donut;
+
 	/**
 	 * Launch the application.
 	 */
@@ -52,7 +53,8 @@ public class DlgDonut extends JDialog {
 	 * Create the dialog.
 	 */
 	public DlgDonut() {
-		isOk=false;
+		setTitle("Add donut");
+		isOk = false;
 		edgeColor = Color.black;
 		bgColor = Color.white;
 		setModal(true);
@@ -61,10 +63,10 @@ public class DlgDonut extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[] {60, 0, 40, 40};
-		gbl_contentPanel.rowHeights = new int[] {30, 0, 30, 0, 30, 0, 0, 30, 30, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		gbl_contentPanel.columnWidths = new int[] { 60, 0, 40, 40 };
+		gbl_contentPanel.rowHeights = new int[] { 30, 0, 30, 0, 30, 0, 0, 30, 30, 0 };
+		gbl_contentPanel.columnWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_contentPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 		contentPanel.setLayout(gbl_contentPanel);
 		{
 			JLabel lblX = new JLabel("X:");
@@ -183,32 +185,32 @@ public class DlgDonut extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(validateInput())
-						{
-						int x = Integer.parseInt(txtX.getText());
-						int y= Integer.parseInt(txtY.getText());
-						int radius = Integer.parseInt(txtRadius.getText());
-						int innerRadius = Integer.parseInt(txtInnerRadius.getText());
-						if(x>=0 && y>=0 && radius > 0 && innerRadius >0) {
-							if(innerRadius < radius) {
-						donut = new Donut(new Point(x,y), radius, innerRadius);
-						isOk=true;
-						dispose();
+						if (validateInput()) {
+							int x = Integer.parseInt(txtX.getText());
+							int y = Integer.parseInt(txtY.getText());
+							int radius = Integer.parseInt(txtRadius.getText());
+							int innerRadius = Integer.parseInt(txtInnerRadius.getText());
+							if (x >= 0 && y >= 0 && radius > 0 && innerRadius > 0) {
+								if (innerRadius < radius) {
+									donut = new Donut(new Point(x, y), radius, innerRadius);
+									isOk = true;
+									dispose();
+								} else
+									JOptionPane.showMessageDialog(DlgDonut.this,
+											"Inner radius can not bigger than radius!", "Error",
+											JOptionPane.ERROR_MESSAGE);
+							} else
+								JOptionPane.showMessageDialog(DlgDonut.this,
+										"Coordinates, radius and inner radius can not be less than 0!", "Error",
+										JOptionPane.ERROR_MESSAGE);
 						}
-						else
-						JOptionPane.showMessageDialog(DlgDonut.this,"Inner radius can not bigger than radius!","Error",JOptionPane.ERROR_MESSAGE);
-							}
-						else
-							JOptionPane.showMessageDialog(DlgDonut.this,"Coordinates, radius and inner radius can not be less than 0!","Error",JOptionPane.ERROR_MESSAGE);
-						}
-					
+
 						else
 							JOptionPane.showMessageDialog(DlgDonut.this,
-		                            "Please fill in all fields with correct values.",
-		                            "Error!",
-		                            JOptionPane.ERROR_MESSAGE);
-						
-						}
+									"Please fill in all fields with correct values.", "Error!",
+									JOptionPane.ERROR_MESSAGE);
+
+					}
 				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
@@ -218,7 +220,7 @@ public class DlgDonut extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						isOk =false;
+						isOk = false;
 						dispose();
 					}
 				});
@@ -229,17 +231,18 @@ public class DlgDonut extends JDialog {
 	}
 
 	private boolean validateInput() {
-        String xText = txtX.getText();
-        String yText = txtY.getText();
-        String radiusText = txtRadius.getText();
-        String innerRadiusText = txtInnerRadius.getText();
-   
-        return !xText.isEmpty() && !yText.isEmpty() && !radiusText.isEmpty() && !innerRadiusText.isEmpty() 
-        		&& isNumeric(xText) && isNumeric(yText) && isNumeric(radiusText) && isNumeric(innerRadiusText); 
-    }
-	  private boolean isNumeric(String str) {
-	        return str.matches("-?\\d+(\\.\\d+)?");
-	    }
+		String xText = txtX.getText();
+		String yText = txtY.getText();
+		String radiusText = txtRadius.getText();
+		String innerRadiusText = txtInnerRadius.getText();
+
+		return !xText.isEmpty() && !yText.isEmpty() && !radiusText.isEmpty() && !innerRadiusText.isEmpty()
+				&& isNumeric(xText) && isNumeric(yText) && isNumeric(radiusText) && isNumeric(innerRadiusText);
+	}
+
+	private boolean isNumeric(String str) {
+		return str.matches("-?\\d+(\\.\\d+)?");
+	}
 
 	public JTextField getTxtX() {
 		return txtX;
@@ -260,8 +263,8 @@ public class DlgDonut extends JDialog {
 	public boolean isOk() {
 		return isOk;
 	}
-	public Donut getDonut()
-	{
+
+	public Donut getDonut() {
 		return this.donut;
 	}
 
@@ -282,7 +285,5 @@ public class DlgDonut extends JDialog {
 		this.bgColor = bgColor;
 		btnBgColor.setForeground(bgColor);
 	}
-	
-	
 
 }

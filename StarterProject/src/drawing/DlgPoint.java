@@ -28,9 +28,10 @@ public class DlgPoint extends JDialog {
 	private JTextField txtX;
 	private JTextField txtY;
 	private Point point;
-	private boolean isOk =false;
+	private boolean isOk;
 	private Color color;
 	private JButton btnColor;
+
 	/**
 	 * Launch the application.
 	 */
@@ -48,17 +49,19 @@ public class DlgPoint extends JDialog {
 	 * Create the dialog.
 	 */
 	public DlgPoint() {
+		setTitle("Add point");
+		isOk=false;
 		color = Color.black;
-		setModal(true); 
+		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[] {60, 40, 40};
-		gbl_contentPanel.rowHeights = new int[] {30, 0, 30, 0, 30, 0, 0, 30, 30, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		gbl_contentPanel.columnWidths = new int[] { 60, 40, 40 };
+		gbl_contentPanel.rowHeights = new int[] { 30, 0, 30, 0, 30, 0, 0, 30, 30, 0 };
+		gbl_contentPanel.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
+		gbl_contentPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 		contentPanel.setLayout(gbl_contentPanel);
 		{
 			JLabel lblX = new JLabel("X:");
@@ -121,25 +124,21 @@ public class DlgPoint extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(validateInput())
-						{
+						if (validateInput()) {
 							int x = Integer.parseInt(txtX.getText());
-							int y= Integer.parseInt(txtY.getText());
-						if(x>=0 && y>=0)
-						{
-						point= new Point(x,y,false);
-						isOk=true;
-						dispose();
-						}
-						else {
-							JOptionPane.showMessageDialog(DlgPoint.this, "Coordinates can not be less than 0!","Error",JOptionPane.ERROR_MESSAGE);
-						}
-						}
-						else
+							int y = Integer.parseInt(txtY.getText());
+							if (x >= 0 && y >= 0) {
+								point = new Point(x, y, false);
+								isOk = true;
+								dispose();
+							} else {
+								JOptionPane.showMessageDialog(DlgPoint.this, "Coordinates can not be less than 0!",
+										"Error", JOptionPane.ERROR_MESSAGE);
+							}
+						} else
 							JOptionPane.showMessageDialog(DlgPoint.this,
-		                            "Please fill in all fields with correct values.",
-		                            "Error!",
-		                            JOptionPane.ERROR_MESSAGE);
+									"Please fill in all fields with correct values.", "Error!",
+									JOptionPane.ERROR_MESSAGE);
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -150,7 +149,7 @@ public class DlgPoint extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						isOk =false;
+						isOk = false;
 						dispose();
 					}
 				});
@@ -159,15 +158,14 @@ public class DlgPoint extends JDialog {
 			}
 		}
 	}
-	public Point getPoint()
-	{
+
+	public Point getPoint() {
 		return this.point;
 	}
 
 	public JTextField getTxtX() {
 		return txtX;
 	}
-
 
 	public JTextField getTxtY() {
 		return txtY;
@@ -180,15 +178,17 @@ public class DlgPoint extends JDialog {
 	public void setOk(boolean isOk) {
 		this.isOk = isOk;
 	}
+
 	private boolean validateInput() {
-        String xText = txtX.getText();
-        String yText = txtY.getText();
-        
-        return !xText.isEmpty() && !yText.isEmpty() && isNumeric(xText) && isNumeric(yText);
-    }
-	  private boolean isNumeric(String str) {
-	        return str.matches("-?\\d+(\\.\\d+)?");
-	    }
+		String xText = txtX.getText();
+		String yText = txtY.getText();
+
+		return !xText.isEmpty() && !yText.isEmpty() && isNumeric(xText) && isNumeric(yText);
+	}
+
+	private boolean isNumeric(String str) {
+		return str.matches("-?\\d+(\\.\\d+)?");
+	}
 
 	public Color getColor() {
 		return color;
@@ -198,6 +198,5 @@ public class DlgPoint extends JDialog {
 		this.color = color;
 		btnColor.setForeground(color);
 	}
-
 
 }

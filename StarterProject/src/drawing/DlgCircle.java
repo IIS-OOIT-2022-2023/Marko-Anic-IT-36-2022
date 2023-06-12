@@ -29,10 +29,10 @@ public class DlgCircle extends JDialog {
 	private JTextField txtRadius;
 	private JButton btnEdgeColor;
 	private JButton btnBgColor;
-    private Circle circle;
-    private Color edgeColor;
-    private Color bgColor;
-    private boolean isOk;
+	private Circle circle;
+	private Color edgeColor;
+	private Color bgColor;
+	private boolean isOk;
 
 	/**
 	 * Launch the application.
@@ -50,10 +50,11 @@ public class DlgCircle extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-public DlgCircle() {
+	public DlgCircle() {
+		setTitle("Add circle");
 		edgeColor = Color.black;
 		bgColor = Color.white;
-		isOk=false;
+		isOk = false;
 		setTitle("Add circle");
 		setModal(true);
 		setBounds(100, 100, 450, 300);
@@ -61,10 +62,10 @@ public DlgCircle() {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[] {60, 0, 40, 40};
-		gbl_contentPanel.rowHeights = new int[] {30, 0, 30, 0, 30, 0, 30, 30, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		gbl_contentPanel.columnWidths = new int[] { 60, 0, 40, 40 };
+		gbl_contentPanel.rowHeights = new int[] { 30, 0, 30, 0, 30, 0, 30, 30, 0 };
+		gbl_contentPanel.columnWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_contentPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 		contentPanel.setLayout(gbl_contentPanel);
 		{
 			JLabel lblX = new JLabel("X:");
@@ -165,33 +166,31 @@ public DlgCircle() {
 				btnOk.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (validateInput()) {
-		                    int x = Integer.parseInt(txtX.getText());
-		                    int y = Integer.parseInt(txtY.getText());
-		                    int radius = Integer.parseInt(txtRadius.getText());
-		                   // JOptionPane.showMessageDialog(null,radius);
-		                    if(x>=0 && y>=0 && radius >0)
-		                    {
-		                    	circle = new Circle(new Point(x,y), radius);
-		                    	isOk=true;
-		                    	dispose();
-		                    }
-		                    else
-		                    	JOptionPane.showMessageDialog(DlgCircle.this,"Coordinates and radius can not be less than 0.","Error",JOptionPane.ERROR_MESSAGE);
-		                } 
-						else {
-		                    JOptionPane.showMessageDialog(DlgCircle.this,
-		                            "Please fill in all fields with correct values.",
-		                            "Error!",
-		                            JOptionPane.ERROR_MESSAGE);
-		                }
-		            }	
+							int x = Integer.parseInt(txtX.getText());
+							int y = Integer.parseInt(txtY.getText());
+							int radius = Integer.parseInt(txtRadius.getText());
+							// JOptionPane.showMessageDialog(null,radius);
+							if (x >= 0 && y >= 0 && radius > 0) {
+								circle = new Circle(new Point(x, y), radius);
+								isOk = true;
+								dispose();
+							} else
+								JOptionPane.showMessageDialog(DlgCircle.this,
+										"Coordinates and radius can not be less than 0.", "Error",
+										JOptionPane.ERROR_MESSAGE);
+						} else {
+							JOptionPane.showMessageDialog(DlgCircle.this,
+									"Please fill in all fields with correct values.", "Error!",
+									JOptionPane.ERROR_MESSAGE);
+						}
+					}
 				});
 				btnOk.setActionCommand("OK");
 				buttonPane.add(btnOk);
 				getRootPane().setDefaultButton(btnOk);
 			}
 			{
-			 JButton btnCancel = new JButton("Cancel");
+				JButton btnCancel = new JButton("Cancel");
 				btnCancel.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
@@ -202,7 +201,6 @@ public DlgCircle() {
 			}
 		}
 	}
-
 
 	public JTextField getTxtX() {
 		return txtX;
@@ -227,28 +225,31 @@ public DlgCircle() {
 	public void setTxtRadius(JTextField txtRadius) {
 		this.txtRadius = txtRadius;
 	}
-	 public Circle getCircle() {
-	        return circle;
-	    }
-	public boolean isOk()
-	{
+
+	public Circle getCircle() {
+		return circle;
+	}
+
+	public boolean isOk() {
 		return this.isOk;
 	}
-	public void setOk(boolean isOk)
-	{
+
+	public void setOk(boolean isOk) {
 		this.isOk = isOk;
 	}
+
 	private boolean validateInput() {
-        String xText = txtX.getText();
-        String yText = txtY.getText();
-        String radiusText = txtRadius.getText();
-        
-        return !xText.isEmpty() && !yText.isEmpty() && !radiusText.isEmpty()
-                && isNumeric(xText) && isNumeric(yText) && isNumeric(radiusText);
-    }
-	  private boolean isNumeric(String str) {
-	        return str.matches("-?\\d+(\\.\\d+)?");
-	    }
+		String xText = txtX.getText();
+		String yText = txtY.getText();
+		String radiusText = txtRadius.getText();
+
+		return !xText.isEmpty() && !yText.isEmpty() && !radiusText.isEmpty() && isNumeric(xText) && isNumeric(yText)
+				&& isNumeric(radiusText);
+	}
+
+	private boolean isNumeric(String str) {
+		return str.matches("-?\\d+(\\.\\d+)?");
+	}
 
 	public Color getEdgeColor() {
 		return edgeColor;
@@ -267,8 +268,5 @@ public DlgCircle() {
 		this.bgColor = bgColor;
 		btnBgColor.setForeground(bgColor);
 	}
-
-
-	
 
 }
