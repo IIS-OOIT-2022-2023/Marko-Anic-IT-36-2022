@@ -212,7 +212,7 @@ public class FrmDraw extends JFrame {
 					}
 					if(tglbtnCircle.isSelected())
 					{
-						StackDialog dialog = new StackDialog();
+						DlgCircle dialog = new DlgCircle();
 						dialog.getTxtX().setText(String.valueOf(x));
 						dialog.getTxtY().setText(String.valueOf(y));
 						dialog.setVisible(true);

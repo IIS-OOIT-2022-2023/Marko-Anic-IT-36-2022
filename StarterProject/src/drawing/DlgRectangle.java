@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -159,7 +160,7 @@ public class DlgRectangle extends JDialog {
 			JButton btnBgColor = new JButton("Background color");
 			btnBgColor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					bgColor = JColorChooser.showDialog(DlgRectangle.this, "Choose a Color", Color.BLACK);
+					bgColor = JColorChooser.showDialog(DlgRectangle.this, "Choose a Color", Color.white);
 					btnBgColor.setForeground(bgColor);
 				}
 			});
@@ -178,14 +179,29 @@ public class DlgRectangle extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						if(validateInput())
+						{
 						int x = Integer.parseInt(txtX.getText());
 						int y= Integer.parseInt(txtY.getText());
 						int width = Integer.parseInt(txtWidth.getText());
 						int height = Integer.parseInt(txtHeight.getText());
+						if(x>= 0 && y>= 0 && width>=1 && height >=1) {
 						rectangle = new Rectangle(new Point(x,y), width,height);
 						isOk=true;
 						dispose();
-					}
+						}
+						else
+								JOptionPane.showMessageDialog(DlgRectangle.this,
+			                            "Width and height must be greater than 0 for drawing!",
+			                            "Error!",
+			                            JOptionPane.ERROR_MESSAGE);
+						}
+						else
+								JOptionPane.showMessageDialog(DlgRectangle.this,
+			                            "Please fill in all fields with correct values.",
+			                            "Error!",
+			                            JOptionPane.ERROR_MESSAGE);
+						}
 				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
@@ -205,7 +221,18 @@ public class DlgRectangle extends JDialog {
 		}
 	}
 	
-
+	private boolean validateInput() {
+        String xText = txtX.getText();
+        String yText = txtY.getText();
+        String widthText = txtWidth.getText();
+        String heightText = txtHeight.getText();
+   
+        return !xText.isEmpty() && !yText.isEmpty() && !widthText.isEmpty() && !heightText.isEmpty() 
+        		&& isNumeric(xText) && isNumeric(yText) && isNumeric(widthText) && isNumeric(heightText); 
+    }
+	  private boolean isNumeric(String str) {
+	        return str.matches("-?\\d+(\\.\\d+)?");
+	    }
 	public boolean isOk() {
 		return isOk;
 	}
