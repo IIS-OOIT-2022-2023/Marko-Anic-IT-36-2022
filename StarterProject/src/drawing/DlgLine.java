@@ -1,6 +1,7 @@
 package drawing;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,6 +30,7 @@ public class DlgLine extends JDialog {
 	private JTextField txtY2;
 	private boolean isOk =false;
 	private Line line;
+	private Color color;
 	/**
 	 * Launch the application.
 	 */
@@ -45,6 +48,7 @@ public class DlgLine extends JDialog {
 	 * Create the dialog.
 	 */
 	public DlgLine() {
+		color= Color.black;
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -133,6 +137,22 @@ public class DlgLine extends JDialog {
 			txtY2.setColumns(10);
 		}
 		{
+			JButton btnColor = new JButton("Choose color");
+			btnColor.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					color = JColorChooser.showDialog(DlgLine.this, "Choose a Color", Color.BLACK);
+					btnColor.setForeground(color);
+
+				}
+			});
+			GridBagConstraints gbc_btnColor = new GridBagConstraints();
+			gbc_btnColor.insets = new Insets(15, 0, 5, 0);
+			gbc_btnColor.gridx = 1;
+			gbc_btnColor.gridy = 7;
+			contentPanel.add(btnColor, gbc_btnColor);
+		}
+		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
@@ -206,6 +226,10 @@ public class DlgLine extends JDialog {
 	public boolean isOk()
 	{
 		return this.isOk;
+	}
+	public Color getColor()
+	{
+		return this.color;
 	}
 	private boolean validateInput() {
         String xText = txtX.getText();

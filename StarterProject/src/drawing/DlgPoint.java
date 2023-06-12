@@ -4,12 +4,14 @@ import geometry.Point;
 import stack.StackDialog;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class DlgPoint extends JDialog {
 
@@ -26,6 +29,7 @@ public class DlgPoint extends JDialog {
 	private JTextField txtY;
 	private Point point;
 	private boolean isOk =false;
+	private Color color;
 	/**
 	 * Launch the application.
 	 */
@@ -43,6 +47,7 @@ public class DlgPoint extends JDialog {
 	 * Create the dialog.
 	 */
 	public DlgPoint() {
+		color = Color.black;
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -79,7 +84,7 @@ public class DlgPoint extends JDialog {
 			gbc_lblY.anchor = GridBagConstraints.EAST;
 			gbc_lblY.insets = new Insets(0, 0, 5, 5);
 			gbc_lblY.gridx = 0;
-			gbc_lblY.gridy = 6;
+			gbc_lblY.gridy = 5;
 			contentPanel.add(lblY, gbc_lblY);
 		}
 		{
@@ -88,9 +93,23 @@ public class DlgPoint extends JDialog {
 			gbc_txtY.insets = new Insets(0, 0, 5, 0);
 			gbc_txtY.fill = GridBagConstraints.HORIZONTAL;
 			gbc_txtY.gridx = 1;
-			gbc_txtY.gridy = 6;
+			gbc_txtY.gridy = 5;
 			contentPanel.add(txtY, gbc_txtY);
 			txtY.setColumns(10);
+		}
+		{
+			JButton btnColor = new JButton("Choose color");
+			btnColor.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					color = JColorChooser.showDialog(DlgPoint.this, "Choose a Color", Color.BLACK);
+					btnColor.setForeground(color);
+				}
+			});
+			GridBagConstraints gbc_btnColor = new GridBagConstraints();
+			gbc_btnColor.insets = new Insets(15, 0, 5, 0);
+			gbc_btnColor.gridx = 1;
+			gbc_btnColor.gridy = 7;
+			contentPanel.add(btnColor, gbc_btnColor);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -168,6 +187,14 @@ public class DlgPoint extends JDialog {
 	  private boolean isNumeric(String str) {
 	        return str.matches("-?\\d+(\\.\\d+)?");
 	    }
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
 
 
 }

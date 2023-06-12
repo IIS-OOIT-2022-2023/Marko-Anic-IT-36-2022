@@ -165,8 +165,7 @@ public class FrmDraw extends JFrame {
 						if(dialog.isOk())
 						{
 								point = dialog.getPoint();
-								color = Color.pink;
-								
+								color = dialog.getColor();
 								pnl.addShape(point,color);
 								
 						}
@@ -188,6 +187,7 @@ public class FrmDraw extends JFrame {
 							 if(dialog.isOk()) 
 							 { 
 							line = dialog.getLine();
+							color=dialog.getColor();
 			                 pnl.addShape(line,color);
 							 }
 							 startPoint = null;
