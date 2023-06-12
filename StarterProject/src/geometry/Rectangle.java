@@ -95,8 +95,13 @@ public class Rectangle extends Shape {
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
-		g.setColor(Color.black);
-		g.drawRect(upperLeftPoint.getX(), upperLeftPoint.getY(), width, height);
+		g.setColor(getBgColor()); // Set the background color
+		g.fillRect(upperLeftPoint.getX(), upperLeftPoint.getY(), width, height); // Fill the rectangle with the background color
+		g.setColor(getEdgeColor()); // Set the edge color
+		g.drawRect(upperLeftPoint.getX(), upperLeftPoint.getY(), width, height); // Draw the rectangle with the edge color
+	
+
+
 		if(selected)
 		{
 			g.setColor(Color.blue);

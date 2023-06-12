@@ -10,20 +10,27 @@ import java.util.Map;
 
 import javax.swing.JPanel;
 
+import geometry.Rectangle;
 import geometry.Shape;
 
 public class PnlDrawing extends JPanel {
     private List<Shape> shapes;
-    private Map<Shape, Color> shapeColors;
+
 
     public PnlDrawing() {
         shapes = new ArrayList<>();
-        shapeColors = new HashMap<>();
     }
 
-    public void addShape(Shape shape, Color color) {
+    public void addShape(Shape shape, Color edgeColor) {
         shapes.add(shape);
-        shapeColors.put(shape, color);
+        shape.setEdgeColor(edgeColor);
+        repaint();
+    }
+    public void addShape(Shape shape, Color edgeColor, Color bgColor) {
+    	shapes.add(shape);
+        shape.setEdgeColor(edgeColor);
+        shape.setBgColor(bgColor);
+        
         repaint();
     }
 
@@ -34,8 +41,7 @@ public class PnlDrawing extends JPanel {
         while(it.hasNext())
         {
         	 Shape shape = it.next();
-             Color color = shapeColors.get(shape);
-             g.setColor(color);
+           
              shape.draw(g);
         }
  
