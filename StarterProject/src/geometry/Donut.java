@@ -44,12 +44,22 @@ public class Donut extends Circle{
 	public Donut(Point center, int radius, int innerRadius)
 	{
 		super(center, radius);
-		this.setInnerRadius(innerRadius);
+		try {
+			this.setInnerRadius(innerRadius);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public Donut(Point center, int radius, int innerRadius, boolean selected)
 	{
 		super(center, radius,selected);
-		this.setInnerRadius(innerRadius);
+		try {
+			this.setInnerRadius(innerRadius);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -66,8 +76,11 @@ public class Donut extends Circle{
 	public int getInnerRadius() {
 		return innerRadius;
 	}
-	public void setInnerRadius(int innerRadius) {
-		this.innerRadius = innerRadius;
+	public void setInnerRadius(int innerRadius) throws Exception{
+		if(innerRadius<0)
+			throw new Exception("Radius can not be negative!");
+			this.innerRadius = innerRadius;
+		
 	}
 	@Override
 	public void draw(Graphics g) {

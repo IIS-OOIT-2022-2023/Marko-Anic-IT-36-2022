@@ -29,7 +29,9 @@ public class DlgDonut extends JDialog {
 	private JTextField txtY;
 	private JTextField txtRadius;
 	private JTextField txtInnerRadius;
-	private boolean isOk = false;
+	private JButton btnEdgeColor;
+	private JButton btnBgColor;
+	private boolean isOk ;
     private Color edgeColor;
     private Color bgColor;
 	private Donut donut;
@@ -50,6 +52,7 @@ public class DlgDonut extends JDialog {
 	 * Create the dialog.
 	 */
 	public DlgDonut() {
+		isOk=false;
 		edgeColor = Color.black;
 		bgColor = Color.white;
 		setModal(true);
@@ -144,7 +147,7 @@ public class DlgDonut extends JDialog {
 			txtInnerRadius.setColumns(10);
 		}
 		{
-			JButton btnEdgeColor = new JButton("Edge color");
+			btnEdgeColor = new JButton("Edge color");
 			btnEdgeColor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					edgeColor = JColorChooser.showDialog(DlgDonut.this, "Choose a Color", Color.BLACK);
@@ -158,7 +161,7 @@ public class DlgDonut extends JDialog {
 			contentPanel.add(btnEdgeColor, gbc_btnEdgeColor);
 		}
 		{
-			JButton btnBgColor = new JButton("Background color");
+			btnBgColor = new JButton("Background color");
 			btnBgColor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					bgColor = JColorChooser.showDialog(DlgDonut.this, "Choose a Color", Color.white);
@@ -268,6 +271,7 @@ public class DlgDonut extends JDialog {
 
 	public void setEdgeColor(Color edgeColor) {
 		this.edgeColor = edgeColor;
+		btnEdgeColor.setForeground(edgeColor);
 	}
 
 	public Color getBgColor() {
@@ -276,6 +280,7 @@ public class DlgDonut extends JDialog {
 
 	public void setBgColor(Color bgColor) {
 		this.bgColor = bgColor;
+		btnBgColor.setForeground(bgColor);
 	}
 	
 	

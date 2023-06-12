@@ -27,6 +27,8 @@ public class DlgCircle extends JDialog {
 	private JTextField txtX;
 	private JTextField txtY;
 	private JTextField txtRadius;
+	private JButton btnEdgeColor;
+	private JButton btnBgColor;
     private Circle circle;
     private Color edgeColor;
     private Color bgColor;
@@ -125,7 +127,7 @@ public DlgCircle() {
 			txtRadius.setColumns(10);
 		}
 		{
-			JButton btnEdgeColor = new JButton("Edge color");
+			btnEdgeColor = new JButton("Edge color");
 			btnEdgeColor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					edgeColor = JColorChooser.showDialog(DlgCircle.this, "Choose a Color", Color.BLACK);
@@ -140,7 +142,7 @@ public DlgCircle() {
 			contentPanel.add(btnEdgeColor, gbc_btnEdgeColor);
 		}
 		{
-			JButton btnBgColor = new JButton("Background color");
+			btnBgColor = new JButton("Background color");
 			btnBgColor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					bgColor = JColorChooser.showDialog(DlgCircle.this, "Choose a Color", Color.white);
@@ -254,6 +256,7 @@ public DlgCircle() {
 
 	public void setEdgeColor(Color edgeColor) {
 		this.edgeColor = edgeColor;
+		btnEdgeColor.setForeground(edgeColor);
 	}
 
 	public Color getBgColor() {
@@ -262,6 +265,7 @@ public DlgCircle() {
 
 	public void setBgColor(Color bgColor) {
 		this.bgColor = bgColor;
+		btnBgColor.setForeground(bgColor);
 	}
 
 
