@@ -76,4 +76,10 @@ public class PnlDrawing extends JPanel {
 		this.lastShape = lastShape;
 	}
 
+	public void removeShape(Shape shape) {
+		// TODO Auto-generated method stub
+		shapes.remove(shape);
+		lastShape=null;
+	}
+
 }

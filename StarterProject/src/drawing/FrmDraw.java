@@ -49,6 +49,7 @@ public class FrmDraw extends JFrame {
 	private Color edgeColor;
 	private Color bgColor;
 	private PnlDrawing pnl;
+	private Shape shape;
 	/**
 	 * Launch the application.
 	 */
@@ -73,8 +74,8 @@ public class FrmDraw extends JFrame {
 		edgeColor = Color.black;
 		btnModify = new JButton("Modify");
 		btnDelete = new JButton("Delete");
-		btnModify.setEnabled(false);
-		btnDelete.setEnabled(false);
+		btnModify.setEnabled(true);
+		btnDelete.setEnabled(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
@@ -132,8 +133,7 @@ public class FrmDraw extends JFrame {
 				tglbtnRectangle.setEnabled(true);
 				tglbtnCircle.setEnabled(true);
 				tglbtnDonut.setEnabled(true);
-				btnModify.setEnabled(false);
-				btnDelete.setEnabled(false);
+
 				}
 			}
 		});
@@ -171,7 +171,7 @@ public class FrmDraw extends JFrame {
 		btnModify.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Shape shape = pnl.getLastShape();
+				shape = pnl.getLastShape();
 				if(shape!=null)
 				{
 					if(shape instanceof Donut)
@@ -305,6 +305,8 @@ public class FrmDraw extends JFrame {
 					
 					
 				}
+				else
+					JOptionPane.showMessageDialog(FrmDraw.this,"Select shape to modify!", "Information", JOptionPane.INFORMATION_MESSAGE);
 				
 			}
 		});
@@ -319,7 +321,18 @@ public class FrmDraw extends JFrame {
 	
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				shape = pnl.getLastShape();
+					if(shape!=null) {
+				int choice = JOptionPane.showConfirmDialog(FrmDraw.this, "Are you sure you want to delete the selected shape?", "Confirmation", JOptionPane.YES_NO_OPTION);
 
+	            if (choice == JOptionPane.YES_OPTION) {
+	                pnl.removeShape(shape);
+	                pnl.repaint();
+	            }
+					}
+					else
+						JOptionPane.showMessageDialog(FrmDraw.this,"Select shape to delete!", "Information", JOptionPane.INFORMATION_MESSAGE);
+					
 			}
 		});
 		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 16));
