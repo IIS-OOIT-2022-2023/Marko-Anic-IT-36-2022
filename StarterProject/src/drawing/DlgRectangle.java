@@ -51,6 +51,8 @@ public class DlgRectangle extends JDialog {
 	 * Create the dialog.
 	 */
 	public DlgRectangle() {
+		edgeColor = Color.black;
+		bgColor = Color.white;
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -192,7 +194,7 @@ public class DlgRectangle extends JDialog {
 						}
 						else
 								JOptionPane.showMessageDialog(DlgRectangle.this,
-			                            "Width and height must be greater than 0 for drawing!",
+			                            "Coordinates,width and height can not be less than 0!",
 			                            "Error!",
 			                            JOptionPane.ERROR_MESSAGE);
 						}

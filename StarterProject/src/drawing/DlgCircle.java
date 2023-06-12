@@ -167,14 +167,14 @@ public DlgCircle() {
 		                    int y = Integer.parseInt(txtY.getText());
 		                    int radius = Integer.parseInt(txtRadius.getText());
 		                   // JOptionPane.showMessageDialog(null,radius);
-		                    if(radius >0)
+		                    if(x>=0 && y>=0 && radius >0)
 		                    {
 		                    	circle = new Circle(new Point(x,y), radius);
 		                    	isOk=true;
 		                    	dispose();
 		                    }
 		                    else
-		                    	JOptionPane.showMessageDialog(DlgCircle.this,"The radius cannot be less than 0.","Greška",JOptionPane.ERROR_MESSAGE);
+		                    	JOptionPane.showMessageDialog(DlgCircle.this,"Coordinates and radius can not be less than 0.","Error",JOptionPane.ERROR_MESSAGE);
 		                } 
 						else {
 		                    JOptionPane.showMessageDialog(DlgCircle.this,
