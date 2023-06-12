@@ -83,8 +83,10 @@ public class Circle extends Shape {
 	
 	@Override
 	public void draw(Graphics g) {
-		g.setColor(Color.BLACK);
+		g.setColor(getBgColor());
+		g.fillOval(center.getX()-radius, center.getY()-radius, 2*radius, 2*radius);
 		// TODO Auto-generated method stub
+		g.setColor(getEdgeColor());
 		g.drawOval(center.getX()-radius, center.getY()-radius, 2*radius, 2*radius);
 		if(selected)
 		{

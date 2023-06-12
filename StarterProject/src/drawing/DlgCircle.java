@@ -248,6 +248,22 @@ public DlgCircle() {
 	        return str.matches("-?\\d+(\\.\\d+)?");
 	    }
 
+	public Color getEdgeColor() {
+		return edgeColor;
+	}
+
+	public void setEdgeColor(Color edgeColor) {
+		this.edgeColor = edgeColor;
+	}
+
+	public Color getBgColor() {
+		return bgColor;
+	}
+
+	public void setBgColor(Color bgColor) {
+		this.bgColor = bgColor;
+	}
+
 
 	
 

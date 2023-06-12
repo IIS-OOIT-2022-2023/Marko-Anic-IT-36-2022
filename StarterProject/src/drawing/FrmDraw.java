@@ -220,7 +220,9 @@ public class FrmDraw extends JFrame {
 						if(dialog.isOk())
 						{
 							circle = dialog.getCircle();
-							pnl.addShape(circle,edgeColor);
+							edgeColor = dialog.getEdgeColor();
+							bgColor = dialog.getBgColor();
+							pnl.addShape(circle,edgeColor,bgColor);
 						}
 					}
 					if(tglbtnDonut.isSelected())
