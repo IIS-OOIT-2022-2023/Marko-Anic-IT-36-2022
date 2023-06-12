@@ -246,6 +246,7 @@ public class FrmDraw extends JFrame {
 				if(tglbtnSelect.isSelected())
 				{
 					
+					pnl.selectShape(x, y);
 				}
 			}
 		});

@@ -125,7 +125,7 @@ public class DlgPoint extends JDialog {
 							int y= Integer.parseInt(txtY.getText());
 						if(x>=0 && y>=0)
 						{
-						point= new Point(x,y);
+						point= new Point(x,y,false);
 						isOk=true;
 						dispose();
 						}

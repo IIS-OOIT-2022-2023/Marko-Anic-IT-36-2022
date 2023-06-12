@@ -33,6 +33,26 @@ public class PnlDrawing extends JPanel {
         
         repaint();
     }
+    public void selectShape(int x, int y) {
+        Iterator<Shape> it = shapes.iterator();
+        Shape lastShape = null;
+        
+        while (it.hasNext()) {
+            Shape shape = it.next();
+            
+            if (shape.contains(x, y)) {
+                lastShape = shape;
+            }
+            
+            shape.setSelected(false);
+        }
+        
+        if (lastShape != null) {
+            lastShape.setSelected(true);
+        }
+        
+        repaint();
+    }
 
     @Override
     public void paint(Graphics g) {
