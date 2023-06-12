@@ -30,6 +30,7 @@ public class DlgPoint extends JDialog {
 	private Point point;
 	private boolean isOk =false;
 	private Color color;
+	private JButton btnColor;
 	/**
 	 * Launch the application.
 	 */
@@ -48,7 +49,7 @@ public class DlgPoint extends JDialog {
 	 */
 	public DlgPoint() {
 		color = Color.black;
-		setModal(true);
+		setModal(true); 
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -98,13 +99,14 @@ public class DlgPoint extends JDialog {
 			txtY.setColumns(10);
 		}
 		{
-			JButton btnColor = new JButton("Choose color");
+			btnColor = new JButton("Choose color");
 			btnColor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					color = JColorChooser.showDialog(DlgPoint.this, "Choose a Color", Color.BLACK);
 					btnColor.setForeground(color);
 				}
 			});
+
 			GridBagConstraints gbc_btnColor = new GridBagConstraints();
 			gbc_btnColor.insets = new Insets(15, 0, 5, 0);
 			gbc_btnColor.gridx = 1;
@@ -194,6 +196,7 @@ public class DlgPoint extends JDialog {
 
 	public void setColor(Color color) {
 		this.color = color;
+		btnColor.setForeground(color);
 	}
 
 

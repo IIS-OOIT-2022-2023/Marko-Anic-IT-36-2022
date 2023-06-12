@@ -12,6 +12,7 @@ import geometry.Donut;
 import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;
+import geometry.Shape;
 import stack.StackDialog;
 
 import java.awt.BorderLayout;
@@ -27,13 +28,22 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrmDraw extends JFrame {
 
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
+/*	private JToggleButton tglbtnPoint;
+	private JToggleButton tglbtnLine;
+	private JToggleButton tglbtnRectangle;
+	private JToggleButton tglbtnCircle;
+	private JToggleButton tglbtnDonut;*/
 	private Point point;
 	private Line line;
 	private Point startPoint;
@@ -42,6 +52,7 @@ public class FrmDraw extends JFrame {
 	private Donut donut;
 	private Color edgeColor;
 	private Color bgColor;
+	private PnlDrawing pnl;
 	/**
 	 * Launch the application.
 	 */
@@ -62,6 +73,7 @@ public class FrmDraw extends JFrame {
 	 * Create the frame.
 	 */
 	public FrmDraw() {
+		pnl = new PnlDrawing();
 		edgeColor = Color.black;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -112,6 +124,17 @@ public class FrmDraw extends JFrame {
 		panel_1.setLayout(gbl_panel_1);
 		
 		JToggleButton tglbtnDraw = new JToggleButton("Draw");
+		tglbtnDraw.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(tglbtnDraw.isSelected()) {
+				tglbtnPoint.setEnabled(true);
+				tglbtnLine.setEnabled(true);
+				tglbtnRectangle.setEnabled(true);
+				tglbtnCircle.setEnabled(true);
+				tglbtnDonut.setEnabled(true);
+				}
+			}
+		});
 		tglbtnDraw.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonGroup_1.add(tglbtnDraw);
 		GridBagConstraints gbc_tglbtnDraw = new GridBagConstraints();
@@ -121,6 +144,16 @@ public class FrmDraw extends JFrame {
 		panel_1.add(tglbtnDraw, gbc_tglbtnDraw);
 		
 		JToggleButton tglbtnSelect = new JToggleButton("Select");
+		tglbtnSelect.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				buttonGroup.clearSelection();
+				tglbtnPoint.setEnabled(false);
+				tglbtnLine.setEnabled(false);
+				tglbtnRectangle.setEnabled(false);
+				tglbtnCircle.setEnabled(false);
+				tglbtnDonut.setEnabled(false);
+			}
+		});
 		tglbtnSelect.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonGroup_1.add(tglbtnSelect);
 		GridBagConstraints gbc_tglbtnSelect = new GridBagConstraints();
@@ -129,16 +162,80 @@ public class FrmDraw extends JFrame {
 		gbc_tglbtnSelect.gridy = 1;
 		panel_1.add(tglbtnSelect, gbc_tglbtnSelect);
 		
-		JToggleButton tglbtnModify = new JToggleButton("Modify");
-		tglbtnModify.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonGroup_1.add(tglbtnModify);
-		GridBagConstraints gbc_tglbtnModify = new GridBagConstraints();
-		gbc_tglbtnModify.insets = new Insets(0, 0, 5, 0);
-		gbc_tglbtnModify.gridx = 0;
-		gbc_tglbtnModify.gridy = 2;
-		panel_1.add(tglbtnModify, gbc_tglbtnModify);
+		JButton btnModify = new JButton("Modify");
+		btnModify.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				buttonGroup.clearSelection();
+				tglbtnPoint.setEnabled(false);
+				tglbtnLine.setEnabled(false);
+				tglbtnRectangle.setEnabled(false);
+				tglbtnCircle.setEnabled(false);
+				tglbtnDonut.setEnabled(false);
+				
+				Shape shape = pnl.getLastShape();
+				if(shape!=null)
+				{
+					if(shape instanceof Point)
+					{
+					      Point pointShape = (Point) shape;
+				            DlgPoint dialog = new DlgPoint();
+				            dialog.getTxtX().setText(String.valueOf(pointShape.getX()));
+				            dialog.getTxtY().setText(String.valueOf(pointShape.getY()));
+				            dialog.setColor(pointShape.getEdgeColor());
+				            dialog.setVisible(true);
+				            if (dialog.isOk()) {
+				            	pointShape.setX(Integer.parseInt(dialog.getTxtX().getText()));
+				                pointShape.setY(Integer.parseInt(dialog.getTxtY().getText()));
+				                pointShape.setEdgeColor(dialog.getColor());
+				                pnl.repaint();
+				            }
+					}
+					if(shape instanceof Line)
+					{
+						 Line lineShape = (Line)shape;
+				            DlgLine dialog = new DlgLine();
+				            dialog.getTxtX().setText(String.valueOf(lineShape.getStartPoint().getX()));
+				            dialog.getTxtY().setText(String.valueOf(lineShape.getStartPoint().getY()));
+				            dialog.getTxtX2().setText(String.valueOf(lineShape.getEndPoint().getX()));
+				            dialog.getTxtY2().setText(String.valueOf(lineShape.getEndPoint().getY()));
+				            dialog.setColor(lineShape.getEdgeColor());
+				            
+				            dialog.setVisible(true);
+				            if (dialog.isOk()) {
+				            	int x = Integer.parseInt(dialog.getTxtX().getText());
+								int y= Integer.parseInt(dialog.getTxtY().getText());
+								int xSec = Integer.parseInt(dialog.getTxtX2().getText());
+								int ySec = Integer.parseInt(dialog.getTxtY2().getText());
+				            	lineShape.setStartPoint(new Point(x,y));
+				            	lineShape.setEndPoint(new Point(xSec,ySec));
+				                lineShape.setEdgeColor(dialog.getColor());
+				                pnl.repaint();
+				            }
+					}
+					
+				}
+				
+			}
+		});
+		btnModify.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		buttonGroup_1.add(btnModify);
+		GridBagConstraints gbc_btnModify = new GridBagConstraints();
+		gbc_btnModify.insets = new Insets(0, 0, 5, 0);
+		gbc_btnModify.gridx = 0;
+		gbc_btnModify.gridy = 2;
+		panel_1.add(btnModify, gbc_btnModify);
 		
 		JToggleButton tglbtnDelete = new JToggleButton("Delete");
+		tglbtnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				buttonGroup.clearSelection();
+				tglbtnPoint.setEnabled(false);
+				tglbtnLine.setEnabled(false);
+				tglbtnRectangle.setEnabled(false);
+				tglbtnCircle.setEnabled(false);
+				tglbtnDonut.setEnabled(false);
+			}
+		});
 		tglbtnDelete.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		buttonGroup_1.add(tglbtnDelete);
 		GridBagConstraints gbc_tglbtnDelete = new GridBagConstraints();
@@ -146,8 +243,12 @@ public class FrmDraw extends JFrame {
 		gbc_tglbtnDelete.gridx = 0;
 		gbc_tglbtnDelete.gridy = 3;
 		panel_1.add(tglbtnDelete, gbc_tglbtnDelete);
+		tglbtnPoint.setEnabled(false);
+		tglbtnLine.setEnabled(false);
+		tglbtnRectangle.setEnabled(false);
+		tglbtnCircle.setEnabled(false);
+		tglbtnDonut.setEnabled(false);
 		
-		PnlDrawing pnl = new PnlDrawing();
 		pnl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -156,7 +257,7 @@ public class FrmDraw extends JFrame {
 				
 				if(tglbtnDraw.isSelected())
 				{
-					
+	
 					if(tglbtnPoint.isSelected())
 					{
 						DlgPoint dialog = new DlgPoint();
@@ -245,7 +346,6 @@ public class FrmDraw extends JFrame {
 				
 				if(tglbtnSelect.isSelected())
 				{
-					
 					pnl.selectShape(x, y);
 				}
 			}

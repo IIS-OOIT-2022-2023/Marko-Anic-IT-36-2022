@@ -28,9 +28,11 @@ public class DlgLine extends JDialog {
 	private JTextField txtY;
 	private JTextField txtX2;
 	private JTextField txtY2;
-	private boolean isOk =false;
+	private boolean isOk;
 	private Line line;
 	private Color color;
+	private JButton btnColor;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -48,6 +50,7 @@ public class DlgLine extends JDialog {
 	 * Create the dialog.
 	 */
 	public DlgLine() {
+		isOk =false;
 		color= Color.black;
 		setModal(true);
 		setBounds(100, 100, 450, 300);
@@ -137,13 +140,11 @@ public class DlgLine extends JDialog {
 			txtY2.setColumns(10);
 		}
 		{
-			JButton btnColor = new JButton("Choose color");
+			btnColor = new JButton("Choose color");
 			btnColor.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
 					color = JColorChooser.showDialog(DlgLine.this, "Choose a Color", Color.BLACK);
 					btnColor.setForeground(color);
-
 				}
 			});
 			GridBagConstraints gbc_btnColor = new GridBagConstraints();
@@ -231,6 +232,11 @@ public class DlgLine extends JDialog {
 	{
 		return this.color;
 	}
+	public void setColor(Color color)
+	{
+		this.color = color;
+		btnColor.setForeground(color);
+	}
 	private boolean validateInput() {
         String xText = txtX.getText();
         String yText = txtY.getText();
@@ -243,4 +249,8 @@ public class DlgLine extends JDialog {
 	  private boolean isNumeric(String str) {
 	        return str.matches("-?\\d+(\\.\\d+)?");
 	    }
+
+	public void setLine(Line line) {
+		this.line = line;
+	}
 }

@@ -15,7 +15,7 @@ import geometry.Shape;
 
 public class PnlDrawing extends JPanel {
     private List<Shape> shapes;
-
+    private Shape lastShape;
 
     public PnlDrawing() {
         shapes = new ArrayList<>();
@@ -35,7 +35,7 @@ public class PnlDrawing extends JPanel {
     }
     public void selectShape(int x, int y) {
         Iterator<Shape> it = shapes.iterator();
-        Shape lastShape = null;
+        lastShape = null;
         
         while (it.hasNext()) {
             Shape shape = it.next();
@@ -43,12 +43,13 @@ public class PnlDrawing extends JPanel {
             if (shape.contains(x, y)) {
                 lastShape = shape;
             }
-            
+           
             shape.setSelected(false);
         }
         
         if (lastShape != null) {
             lastShape.setSelected(true);
+            
         }
         
         repaint();
@@ -66,4 +67,13 @@ public class PnlDrawing extends JPanel {
         }
  
     }
+
+	public Shape getLastShape() {
+		return lastShape;
+	}
+
+	public void setLastShape(Shape lastShape) {
+		this.lastShape = lastShape;
+	}
+
 }
