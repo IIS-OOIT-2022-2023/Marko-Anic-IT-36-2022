@@ -3,6 +3,7 @@ package drawing;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -39,6 +40,7 @@ public class FrmDraw extends JFrame {
 	private Rectangle rectangle;
 	private Circle circle;
 	private Donut donut;
+	private Color color;
 	/**
 	 * Launch the application.
 	 */
@@ -59,6 +61,7 @@ public class FrmDraw extends JFrame {
 	 * Create the frame.
 	 */
 	public FrmDraw() {
+		color = Color.black;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
@@ -161,8 +164,11 @@ public class FrmDraw extends JFrame {
 						dialog.setVisible(true);
 						if(dialog.isOk())
 						{
-							point = dialog.getPoint();
-							pnl.addShape(point);
+								point = dialog.getPoint();
+								color = Color.pink;
+								
+								pnl.addShape(point,color);
+								
 						}
 					}
 					
@@ -182,7 +188,7 @@ public class FrmDraw extends JFrame {
 							 if(dialog.isOk()) 
 							 { 
 							line = dialog.getLine();
-			                 pnl.addShape(line);
+			                 pnl.addShape(line,color);
 							 }
 							 startPoint = null;
 			                }
@@ -198,7 +204,7 @@ public class FrmDraw extends JFrame {
 						if(dialog.isOk())
 						{
 						rectangle = dialog.getRectangle();
-						pnl.addShape(rectangle);
+						pnl.addShape(rectangle,color);
 						}
 					}
 					if(tglbtnCircle.isSelected())
@@ -211,7 +217,7 @@ public class FrmDraw extends JFrame {
 						if(dialog.isOk())
 						{
 							circle = dialog.getCircle();
-							pnl.addShape(circle);
+							pnl.addShape(circle,color);
 						}
 					}
 					if(tglbtnDonut.isSelected())
@@ -224,7 +230,7 @@ public class FrmDraw extends JFrame {
 						 if(dialog.isOk())
 						 {
 							 donut = dialog.getDonut();
-							 pnl.addShape(donut);
+							 pnl.addShape(donut,color);
 						 }
 					}
 					

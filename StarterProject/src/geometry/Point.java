@@ -73,8 +73,7 @@ public class Point extends Shape {
 	}
 	@Override
 	public void draw(Graphics g) {
-		g.setColor(Color.BLACK);
-		// tacka kao +
+	// tacka kao +
 		g.drawLine(x-2, y, x+2, y);// horizontalna
 		g.drawLine(x, y-2, x, y+2);
 		
