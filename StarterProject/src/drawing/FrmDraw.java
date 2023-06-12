@@ -212,6 +212,32 @@ public class FrmDraw extends JFrame {
 				                pnl.repaint();
 				            }
 					}
+					if(shape instanceof Rectangle)
+					{
+						Rectangle recShape = (Rectangle) shape;
+						DlgRectangle dialog = new DlgRectangle();
+						dialog.getTxtX().setText(String.valueOf(recShape.getUpperLeftPoint().getX()));
+						dialog.getTxtY().setText(String.valueOf(recShape.getUpperLeftPoint().getY()));
+						dialog.getTxtWidth().setText(String.valueOf(recShape.getWidth()));
+						dialog.getTxtHeight().setText(String.valueOf(recShape.getHeight()));
+						dialog.setBgColor(recShape.getBgColor());
+						dialog.setEdgeColor(recShape.getEdgeColor());
+						dialog.setVisible(true);
+						if(dialog.isOk())
+						{
+							int x = Integer.parseInt(dialog.getTxtX().getText());
+							int y= Integer.parseInt(dialog.getTxtY().getText());
+							int width = Integer.parseInt(dialog.getTxtWidth().getText());
+							int height = Integer.parseInt(dialog.getTxtHeight().getText());
+							
+							recShape.setUpperLeftPoint(new Point(x,y));
+							recShape.setWidth(width);
+							recShape.setHeight(height);
+							recShape.setEdgeColor(dialog.getEdgeColor());
+							recShape.setBgColor(dialog.getBgColor());
+							pnl.repaint();
+						}
+					}
 					
 				}
 				
