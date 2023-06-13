@@ -8,7 +8,7 @@ public class Donut extends Circle {
 	private int innerRadius;
 
 	public Donut() {
-
+		super();
 	}
 
 	@Override
@@ -45,12 +45,10 @@ public class Donut extends Circle {
 
 	public Donut(Point center, int radius, int innerRadius) {
 		super(center, radius);
-		try {
-			this.setInnerRadius(innerRadius);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		setInnerRadius(innerRadius);
+		
+		
 	}
 
 	public Donut(Point center, int radius, int innerRadius, boolean selected) {
@@ -79,9 +77,11 @@ public class Donut extends Circle {
 		return innerRadius;
 	}
 
-	public void setInnerRadius(int innerRadius) throws Exception {
+	public void setInnerRadius(int innerRadius) {
 		if (innerRadius < 0)
-			throw new Exception("Radius can not be negative!");
+			throw new IllegalArgumentException("Radius can not be negative!");
+		if(innerRadius >= super.getRadius())
+			throw new IllegalArgumentException("Inner radius cannot be bigger than radius!");
 		this.innerRadius = innerRadius;
 
 	}

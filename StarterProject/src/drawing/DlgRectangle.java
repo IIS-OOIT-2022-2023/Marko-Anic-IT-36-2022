@@ -197,6 +197,7 @@ public class DlgRectangle extends JDialog {
 								dispose();
 						}
 						catch(NumberFormatException ex) {
+							
 									JOptionPane.showMessageDialog(DlgRectangle.this,
 											"Please fill in all fields with correct values.", "Error!",
 											JOptionPane.ERROR_MESSAGE);

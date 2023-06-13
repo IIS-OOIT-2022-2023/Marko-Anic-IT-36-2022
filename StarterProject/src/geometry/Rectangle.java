@@ -73,7 +73,7 @@ public class Rectangle extends Shape {
 
 	public void setWidth(int width) {
 		if(width<1)
-			throw new IllegalArgumentException("Dimensions cannot be less than 1!");
+			throw new IllegalArgumentException("Dimensions cannot be less than 0!");
 		this.width = width;
 	}
 
@@ -82,8 +82,8 @@ public class Rectangle extends Shape {
 	}
 
 	public void setHeight(int height) {
-		if(height <1)
-			throw new IllegalArgumentException("Dimensions cannot be less than 1");
+		if(height <0)
+			throw new IllegalArgumentException("Dimensions cannot be less than 0");
 		this.height = height;
 	}
 

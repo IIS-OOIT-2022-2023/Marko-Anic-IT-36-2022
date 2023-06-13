@@ -167,25 +167,26 @@ public class DlgCircle extends JDialog {
 				btnOk.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						// Checking for characters or empty textfields
-						if (validateInput()) {
+						try {
 							int x = Integer.parseInt(txtX.getText());
 							int y = Integer.parseInt(txtY.getText());
 							int radius = Integer.parseInt(txtRadius.getText());
 
-							if (x >= 0 && y >= 0 && radius > 0) {
-								circle = new Circle(new Point(x, y), radius);
-								isOk = true;
-								dispose();
-							} else
-								JOptionPane.showMessageDialog(DlgCircle.this,
-										"Coordinates and radius can not be less than 0.", "Error",
-										JOptionPane.ERROR_MESSAGE);
-						} else {
+							circle = new Circle(new Point(x, y), radius);
+							isOk = true;
+							dispose();
+						} catch (NumberFormatException ex) {
+
 							JOptionPane.showMessageDialog(DlgCircle.this,
 									"Please fill in all fields with correct values.", "Error!",
 									JOptionPane.ERROR_MESSAGE);
+						} catch (IllegalArgumentException ex) {
+							JOptionPane.showMessageDialog(DlgCircle.this, ex.getMessage(), "Error",
+									JOptionPane.ERROR_MESSAGE);
 						}
+
 					}
+
 				});
 				btnOk.setActionCommand("OK");
 				buttonPane.add(btnOk);

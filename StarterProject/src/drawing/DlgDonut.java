@@ -186,31 +186,24 @@ public class DlgDonut extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						//checking for characters or empty spaces in textfields
-						if (validateInput()) {
+						try{
 							//getting values from textfields
 							int x = Integer.parseInt(txtX.getText());
 							int y = Integer.parseInt(txtY.getText());
 							int radius = Integer.parseInt(txtRadius.getText());
 							int innerRadius = Integer.parseInt(txtInnerRadius.getText());
-							if (x >= 0 && y >= 0 && radius > 0 && innerRadius > 0) {
-								if (innerRadius < radius) {
 									donut = new Donut(new Point(x, y), radius, innerRadius);
 									isOk = true;
 									dispose();
-								} else
-									JOptionPane.showMessageDialog(DlgDonut.this,
-											"Inner radius can not bigger than radius!", "Error",
-											JOptionPane.ERROR_MESSAGE);
-							} else
-								JOptionPane.showMessageDialog(DlgDonut.this,
-										"Coordinates, radius and inner radius can not be less than 0!", "Error",
-										JOptionPane.ERROR_MESSAGE);
-						}
-
-						else
+							}
+						catch (NumberFormatException ex) {
 							JOptionPane.showMessageDialog(DlgDonut.this,
 									"Please fill in all fields with correct values.", "Error!",
 									JOptionPane.ERROR_MESSAGE);
+						} catch (IllegalArgumentException ex) {
+							JOptionPane.showMessageDialog(DlgDonut.this, ex.getMessage(), "Error",
+									JOptionPane.ERROR_MESSAGE);
+						}
 
 					}
 				});

@@ -13,8 +13,7 @@ public class Circle extends Shape {
 
 	public Circle(Point center, int radius) {
 		this.center = center;
-		this.radius = radius;
-		//setRadius(radius);
+		setRadius(radius);
 	}
 
 	public Circle(Point center, int radius, boolean selected) {
@@ -68,9 +67,9 @@ public class Circle extends Shape {
 		return this.radius;
 	}
 
-	public void setRadius(int radius) throws Exception {
+	public void setRadius(int radius) {
 		if (radius < 0)
-			throw new Exception("Radius ne moze biti negativan broj!");
+			throw new IllegalArgumentException("Radius cannot be less than 0!");
 		this.radius = radius;
 	}
 
