@@ -129,10 +129,10 @@ public class DlgPoint extends JDialog {
 								//getting values from textfields
 								int x = Integer.parseInt(txtX.getText());
 								int y = Integer.parseInt(txtY.getText());
-								
-									point = new Point(x, y, false);
-									isOk = true;
-									dispose();
+	
+								point = new Point(x, y, false);
+								isOk = true;
+								dispose();
 								
 							}
 							catch (NumberFormatException ex) {
@@ -141,12 +141,6 @@ public class DlgPoint extends JDialog {
 							catch (IllegalArgumentException ex){
 				                JOptionPane.showMessageDialog(DlgPoint.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 								}
-							/*else
-								JOptionPane.showMessageDialog(DlgPoint.this,
-										"Please fill in all fields with correct values.", "Error!",
-										JOptionPane.ERROR_MESSAGE);*/
-				
-						
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -157,7 +151,6 @@ public class DlgPoint extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						isOk = false;
 						dispose();
 					}
 				});

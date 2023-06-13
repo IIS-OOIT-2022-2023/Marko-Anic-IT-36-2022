@@ -224,20 +224,6 @@ public class DlgRectangle extends JDialog {
 		}
 	}
 
-	private boolean validateInput() {
-		String xText = txtX.getText();
-		String yText = txtY.getText();
-		String widthText = txtWidth.getText();
-		String heightText = txtHeight.getText();
-
-		return !xText.isEmpty() && !yText.isEmpty() && !widthText.isEmpty() && !heightText.isEmpty() && isNumeric(xText)
-				&& isNumeric(yText) && isNumeric(widthText) && isNumeric(heightText);
-	}
-
-	private boolean isNumeric(String str) {
-		return str.matches("-?\\d+(\\.\\d+)?");
-	}
-
 	public boolean isOk() {
 		return isOk;
 	}

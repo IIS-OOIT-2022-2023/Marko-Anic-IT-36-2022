@@ -224,20 +224,6 @@ public class DlgDonut extends JDialog {
 		}
 	}
 
-	private boolean validateInput() {
-		String xText = txtX.getText();
-		String yText = txtY.getText();
-		String radiusText = txtRadius.getText();
-		String innerRadiusText = txtInnerRadius.getText();
-
-		return !xText.isEmpty() && !yText.isEmpty() && !radiusText.isEmpty() && !innerRadiusText.isEmpty()
-				&& isNumeric(xText) && isNumeric(yText) && isNumeric(radiusText) && isNumeric(innerRadiusText);
-	}
-
-	private boolean isNumeric(String str) {
-		return str.matches("-?\\d+(\\.\\d+)?");
-	}
-
 	public JTextField getTxtX() {
 		return txtX;
 	}

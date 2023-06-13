@@ -241,19 +241,6 @@ public class DlgCircle extends JDialog {
 		this.isOk = isOk;
 	}
 
-	private boolean validateInput() {
-		String xText = txtX.getText();
-		String yText = txtY.getText();
-		String radiusText = txtRadius.getText();
-
-		return !xText.isEmpty() && !yText.isEmpty() && !radiusText.isEmpty() && isNumeric(xText) && isNumeric(yText)
-				&& isNumeric(radiusText);
-	}
-
-	private boolean isNumeric(String str) {
-		return str.matches("-?\\d+(\\.\\d+)?");
-	}
-
 	public Color getEdgeColor() {
 		return edgeColor;
 	}

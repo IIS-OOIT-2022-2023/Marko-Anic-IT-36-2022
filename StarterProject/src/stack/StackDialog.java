@@ -19,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import drawing.DlgCircle;
+
 public class StackDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -124,21 +126,21 @@ public class StackDialog extends JDialog {
 				btnOk.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						//if input has not characters or empty spaces
-						if (validateInput()) {
+						try {
 							int x = Integer.parseInt(txtX.getText());
 							int y = Integer.parseInt(txtY.getText());
 							int radius = Integer.parseInt(txtRadius.getText());
-							
-							if (radius > 0) {
-								circle = new Circle(new Point(x, y), radius);
-								isOk = true;
-								dispose();
-							} else
-								JOptionPane.showMessageDialog(StackDialog.this, "The radius cannot be less than 0.",
-										"Greška", JOptionPane.ERROR_MESSAGE);
-						} else {
+
+							circle = new Circle(new Point(x, y), radius);
+							isOk = true;
+							dispose();
+						} catch (NumberFormatException ex) {
+
 							JOptionPane.showMessageDialog(StackDialog.this,
 									"Please fill in all fields with correct values.", "Error!",
+									JOptionPane.ERROR_MESSAGE);
+						} catch (IllegalArgumentException ex) {
+							JOptionPane.showMessageDialog(StackDialog.this, ex.getMessage(), "Error",
 									JOptionPane.ERROR_MESSAGE);
 						}
 					}
@@ -194,19 +196,6 @@ public class StackDialog extends JDialog {
 
 	public void setOk(boolean isOk) {
 		this.isOk = isOk;
-	}
-
-	private boolean validateInput() {
-		String xText = txtX.getText();
-		String yText = txtY.getText();
-		String radiusText = txtRadius.getText();
-
-		return !xText.isEmpty() && !yText.isEmpty() && !radiusText.isEmpty() && isNumeric(xText) && isNumeric(yText)
-				&& isNumeric(radiusText);
-	}
-
-	private boolean isNumeric(String str) {
-		return str.matches("-?\\d+(\\.\\d+)?");
 	}
 
 }

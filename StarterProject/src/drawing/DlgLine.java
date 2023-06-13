@@ -233,20 +233,6 @@ public class DlgLine extends JDialog {
 		btnColor.setForeground(color);
 	}
 
-	private boolean validateInput() {
-		String xText = txtX.getText();
-		String yText = txtY.getText();
-		String x2Text = txtX2.getText();
-		String y2Text = txtY2.getText();
-
-		return !xText.isEmpty() && !yText.isEmpty() && !x2Text.isEmpty() && !y2Text.isEmpty() && isNumeric(xText)
-				&& isNumeric(yText) && isNumeric(x2Text) && isNumeric(y2Text);
-	}
-
-	private boolean isNumeric(String str) {
-		return str.matches("-?\\d+(\\.\\d+)?");
-	}
-
 	public void setLine(Line line) {
 		this.line = line;
 	}
