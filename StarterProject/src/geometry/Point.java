@@ -13,8 +13,8 @@ public class Point extends Shape {
 	}
 
 	public Point(int x, int y) {
-		this.x = x;
-		this.y = y;
+		setX(x);
+		setY(y);
 	}
 
 	public Point(int x, int y, boolean selected) {
@@ -52,8 +52,11 @@ public class Point extends Shape {
 		return x;
 	}
 
-	public void setX(int newX) {
-		x = newX;
+	public void setX(int newX)  {
+		 if (newX < 0) {
+	            throw new IllegalArgumentException("Coordinates cannot be negative.");
+	        }
+	        x = newX;
 	}
 
 	public int getY() {
@@ -61,8 +64,10 @@ public class Point extends Shape {
 	}
 
 	public void setY(int newY) {
-		y = newY;
-	}
+		if (newY < 0) {
+            throw new IllegalArgumentException("Coordinate cannot be negative.");
+        }
+        y = newY;	}
 
 	@Override
 	public void draw(Graphics g) {

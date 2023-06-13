@@ -443,7 +443,12 @@ public class FrmDraw extends JFrame {
 						}
 					}
 					
-					
+					if(!tglbtnPoint.isSelected() && !tglbtnLine.isSelected() && !tglbtnRectangle.isSelected()
+							&& !tglbtnCircle.isSelected() && !tglbtnDonut.isSelected() && x>=0 && y>=0 )
+							
+					{
+						JOptionPane.showMessageDialog(FrmDraw.this, "Please select shape that you want to draw!","Information",JOptionPane.INFORMATION_MESSAGE);
+					}
 					
 				}
 

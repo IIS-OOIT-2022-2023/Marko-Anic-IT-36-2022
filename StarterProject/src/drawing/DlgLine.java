@@ -163,24 +163,23 @@ public class DlgLine extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						//checking for characters or empty spaces in textfields
-						if (validateInput()) {
 							//getting values from textfields
+						try {
 							int x = Integer.parseInt(txtX.getText());
 							int y = Integer.parseInt(txtY.getText());
 							int xSec = Integer.parseInt(txtX2.getText());
 							int ySec = Integer.parseInt(txtY2.getText());
-							if (x >= 0 && y >= 0 && xSec >= 0 && ySec >= 0) {
 								line = new Line(new Point(x, y), new Point(xSec, ySec));
 								isOk = true;
 								dispose();
-							} else
-								JOptionPane.showMessageDialog(DlgLine.this, "Coordinates can not be less than 0!",
-										"Error!", JOptionPane.ERROR_MESSAGE);
-
-						} else
-							JOptionPane.showMessageDialog(DlgLine.this,
-									"Please fill in all fields with correct values.", "Error!",
-									JOptionPane.ERROR_MESSAGE);
+						}
+						catch (NumberFormatException ex) {
+				            JOptionPane.showMessageDialog(DlgLine.this, "Invalid input! Please enter valid integer values.", "Error!", JOptionPane.ERROR_MESSAGE);
+						}
+						catch (IllegalArgumentException ex) {
+				            JOptionPane.showMessageDialog(DlgLine.this, ex.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
+				        }
+							
 					}
 				});
 				okButton.setActionCommand("OK");

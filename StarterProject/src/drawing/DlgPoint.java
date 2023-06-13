@@ -125,22 +125,29 @@ public class DlgPoint extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						//checking for characters or empty spaces in textfields
-						if (validateInput()) {
-							//getting values from textfields
-							int x = Integer.parseInt(txtX.getText());
-							int y = Integer.parseInt(txtY.getText());
-							if (x >= 0 && y >= 0) {
-								point = new Point(x, y, false);
-								isOk = true;
-								dispose();
-							} else {
-								JOptionPane.showMessageDialog(DlgPoint.this, "Coordinates can not be less than 0!",
-										"Error", JOptionPane.ERROR_MESSAGE);
+							try {
+								//getting values from textfields
+								int x = Integer.parseInt(txtX.getText());
+								int y = Integer.parseInt(txtY.getText());
+								try {
+									point = new Point(x, y, false);
+									isOk = true;
+									dispose();
+								
 							}
-						} else
-							JOptionPane.showMessageDialog(DlgPoint.this,
-									"Please fill in all fields with correct values.", "Error!",
-									JOptionPane.ERROR_MESSAGE);
+								catch (IllegalArgumentException ex){
+				                JOptionPane.showMessageDialog(DlgPoint.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+								}
+							}
+							catch (NumberFormatException ex) {
+					            JOptionPane.showMessageDialog(DlgPoint.this, "Invalid input! Please enter valid integer values.", "Error", JOptionPane.ERROR_MESSAGE);
+					        }
+							/*else
+								JOptionPane.showMessageDialog(DlgPoint.this,
+										"Please fill in all fields with correct values.", "Error!",
+										JOptionPane.ERROR_MESSAGE);*/
+				
+						
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -186,7 +193,9 @@ public class DlgPoint extends JDialog {
 		String yText = txtY.getText();
 
 		return !xText.isEmpty() && !yText.isEmpty() && isNumeric(xText) && isNumeric(yText);
-	}
+		
+		
+		}
 
 	private boolean isNumeric(String str) {
 		return str.matches("-?\\d+(\\.\\d+)?");
