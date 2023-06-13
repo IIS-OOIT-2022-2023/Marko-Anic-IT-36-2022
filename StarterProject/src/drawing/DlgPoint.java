@@ -129,19 +129,18 @@ public class DlgPoint extends JDialog {
 								//getting values from textfields
 								int x = Integer.parseInt(txtX.getText());
 								int y = Integer.parseInt(txtY.getText());
-								try {
+								
 									point = new Point(x, y, false);
 									isOk = true;
 									dispose();
 								
 							}
-								catch (IllegalArgumentException ex){
+							catch (NumberFormatException ex) {
+								JOptionPane.showMessageDialog(DlgPoint.this, "Invalid input! Please enter valid integer values.", "Error", JOptionPane.ERROR_MESSAGE);
+							}
+							catch (IllegalArgumentException ex){
 				                JOptionPane.showMessageDialog(DlgPoint.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 								}
-							}
-							catch (NumberFormatException ex) {
-					            JOptionPane.showMessageDialog(DlgPoint.this, "Invalid input! Please enter valid integer values.", "Error", JOptionPane.ERROR_MESSAGE);
-					        }
 							/*else
 								JOptionPane.showMessageDialog(DlgPoint.this,
 										"Please fill in all fields with correct values.", "Error!",

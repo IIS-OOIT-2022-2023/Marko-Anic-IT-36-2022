@@ -16,15 +16,13 @@ public class Rectangle extends Shape {
 	public Rectangle(Point upperLeftPoint, int width, int height) {
 
 		this.upperLeftPoint = upperLeftPoint;
-		this.width = width;
-		this.height = height;
+		setWidth(width);
+		setHeight(height);
 	}
 
 	public Rectangle(Point upperLeftPoint, int width, int height, boolean selected) {
 
-		this.upperLeftPoint = upperLeftPoint;
-		this.width = width;
-		this.height = height;
+		this(upperLeftPoint,width,height);
 		this.selected = selected;
 	}
 
@@ -74,6 +72,8 @@ public class Rectangle extends Shape {
 	}
 
 	public void setWidth(int width) {
+		if(width<1)
+			throw new IllegalArgumentException("Dimensions cannot be less than 1!");
 		this.width = width;
 	}
 
@@ -82,6 +82,8 @@ public class Rectangle extends Shape {
 	}
 
 	public void setHeight(int height) {
+		if(height <1)
+			throw new IllegalArgumentException("Dimensions cannot be less than 1");
 		this.height = height;
 	}
 

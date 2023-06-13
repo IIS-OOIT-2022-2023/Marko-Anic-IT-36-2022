@@ -30,7 +30,7 @@ public class DlgRectangle extends JDialog {
 	private JTextField txtWidth;
 	private JTextField txtHeight;
 	private Rectangle rectangle;
-	private boolean isOk = false;
+	private boolean isOk;
 	private Color edgeColor;
 	private Color bgColor;
 	private JButton btnBgColor;
@@ -56,6 +56,7 @@ public class DlgRectangle extends JDialog {
 		setTitle("Add rectangle");
 		edgeColor = Color.black;
 		bgColor = Color.white;
+		isOk=false;
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -185,24 +186,24 @@ public class DlgRectangle extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						//checking for characters or empty spaces in textfields
-						if (validateInput()) {
+						try {
 							//getting values from textfields
 							int x = Integer.parseInt(txtX.getText());
 							int y = Integer.parseInt(txtY.getText());
 							int width = Integer.parseInt(txtWidth.getText());
 							int height = Integer.parseInt(txtHeight.getText());
-							if (x >= 0 && y >= 0 && width >= 1 && height >= 1) {
 								rectangle = new Rectangle(new Point(x, y), width, height);
 								isOk = true;
 								dispose();
-							} else
-								JOptionPane.showMessageDialog(DlgRectangle.this,
-										"Coordinates,width and height can not be less than 0!", "Error!",
-										JOptionPane.ERROR_MESSAGE);
-						} else
-							JOptionPane.showMessageDialog(DlgRectangle.this,
-									"Please fill in all fields with correct values.", "Error!",
-									JOptionPane.ERROR_MESSAGE);
+						}
+						catch(NumberFormatException ex) {
+									JOptionPane.showMessageDialog(DlgRectangle.this,
+											"Please fill in all fields with correct values.", "Error!",
+											JOptionPane.ERROR_MESSAGE);
+									}
+						catch (IllegalArgumentException ex) {
+				            JOptionPane.showMessageDialog(DlgRectangle.this, ex.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
+				        }
 					}
 				});
 				okButton.setActionCommand("OK");

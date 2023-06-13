@@ -169,6 +169,7 @@ public class DlgLine extends JDialog {
 							int y = Integer.parseInt(txtY.getText());
 							int xSec = Integer.parseInt(txtX2.getText());
 							int ySec = Integer.parseInt(txtY2.getText());
+							
 								line = new Line(new Point(x, y), new Point(xSec, ySec));
 								isOk = true;
 								dispose();
