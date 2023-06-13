@@ -53,9 +53,8 @@ public class Point extends Shape {
 	}
 
 	public void setX(int newX)  {
-		 if (newX < 0) {
-	            throw new IllegalArgumentException("Coordinates cannot be negative.");
-	        }
+		 if (newX < 0)
+	            throw new IllegalArgumentException("Coordinates cannot be negative!");
 	        x = newX;
 	}
 
@@ -64,10 +63,10 @@ public class Point extends Shape {
 	}
 
 	public void setY(int newY) {
-		if (newY < 0) {
-            throw new IllegalArgumentException("Coordinate cannot be negative.");
+		if (newY < 0) 
+            throw new IllegalArgumentException("Coordinates cannot be negative!");
+        y = newY;	
         }
-        y = newY;	}
 
 	@Override
 	public void draw(Graphics g) {

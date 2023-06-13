@@ -95,7 +95,7 @@ public class FrmMain extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dialog = new StackDialog();
 				dialog.setTitle("Delete circle");
-				if (!circleListModel.isEmpty()) {
+			    if (!circleListModel.isEmpty()) {
 					//circle at first position
 					Circle circle = circleListModel.get(0);
 					//setting values to JTextFields
@@ -106,7 +106,7 @@ public class FrmMain extends JFrame {
 					dialog.setVisible(true);
 
 					if (dialog.isOk()) {
-						//popping circle from stack
+						// opping circle from stack
 						circleListModel.remove(0);
 					}
 				} else {

@@ -133,7 +133,7 @@ public class StackDialog extends JDialog {
 
 							circle = new Circle(new Point(x, y), radius);
 							isOk = true;
-							dispose();
+							dispose(); 
 						} catch (NumberFormatException ex) {
 
 							JOptionPane.showMessageDialog(StackDialog.this,
