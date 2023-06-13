@@ -32,6 +32,7 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.LineBorder;
 
 public class FrmDraw extends JFrame {
 
@@ -69,7 +70,9 @@ public class FrmDraw extends JFrame {
 	 * Create the frame.
 	 */
 	public FrmDraw() {
+		setTitle("Marko Anić IT-36/2022");
 		pnl = new PnlDrawing();
+		pnl.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		//default colors
 		edgeColor = Color.black;
 		bgColor = Color.white;		
@@ -130,13 +133,13 @@ public class FrmDraw extends JFrame {
 				tglbtnRectangle.setEnabled(true);
 				tglbtnCircle.setEnabled(true);
 				tglbtnDonut.setEnabled(true);
-				//if there is a selected shape, that will be deselected when we want to draw 
-				//if shape isn't null, that means that we have a selected shape in panel
+				shape = pnl.getLastShape();
+				// If there is a selected shape, that shape will be deselected when we want to draw 
+				// if shape isn't null, that means that we have a selected shape in panel
 				if (shape != null) { 
-					
 					shape.setSelected(false);
 				}
-				shape = null; // reseting
+				pnl.setLastShape(null);; // Reseting
 				pnl.repaint(); 
 				
 			}
@@ -174,15 +177,15 @@ public class FrmDraw extends JFrame {
 		JButton btnModify = new JButton("Modify");
 		btnModify.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//getting selected shape
+				// Getting selected shape
 				shape = pnl.getLastShape();
-				
+				// Checking if shape is selected
 				if (shape != null) {
-					//if that shape is Donut
+					// If that shape is Donut
 					if (shape instanceof Donut) {
 						Donut donutShape = (Donut) shape;
 						DlgDonut dialog = new DlgDonut();
-						//setting values for dialog
+						// Setting values for dialog
 						dialog.setTitle("Modify donut");
 						dialog.getTxtX().setText(String.valueOf(donutShape.getCenter().getX()));
 						dialog.getTxtY().setText(String.valueOf(donutShape.getCenter().getY()));
@@ -191,38 +194,34 @@ public class FrmDraw extends JFrame {
 						dialog.setEdgeColor(donutShape.getEdgeColor());
 						dialog.setBgColor(donutShape.getBgColor());
 						dialog.setVisible(true);
-						//if ok is pressed and donut is passed
 						if (dialog.isOk()) {
-							//getting values from textfields
+							// Getting values from textfields
 							int x = Integer.parseInt(dialog.getTxtX().getText());
 							int y = Integer.parseInt(dialog.getTxtY().getText());
 							int radius = Integer.parseInt(dialog.getTxtRadius().getText());
 							int innerRadius = Integer.parseInt(dialog.getTxtInnerRadius().getText());
-							//changing original center
+							// Changing original center
 							donutShape.moveTo(x, y);
-							//changing original radius
+							// Changing original radius
 							try {
 								donutShape.setRadius(radius);
 							} catch (Exception e1) {
 								e1.printStackTrace();
 							}
-							//changing original inner radius
+							// Changing original inner radius
 							try {
 								donutShape.setInnerRadius(innerRadius);
 							} catch (Exception e1) {
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
-							//getting colors from dialog
+							// Getting colors from dialog
 							donutShape.setEdgeColor(dialog.getEdgeColor());
 							donutShape.setBgColor(dialog.getBgColor());
-							//again painting shapes
-							donutShape.setSelected(false);
-							pnl.setLastShape(null);
+
 							pnl.repaint();
 						}
 					}
-					//donut and circle have same instance, so we must first check Donut
+					// Donut and circle have same instance, so we must first check Donut
 					else if (shape instanceof Circle) {
 						Circle circleShape = (Circle) shape;
 						DlgCircle dialog = new DlgCircle();
@@ -245,8 +244,6 @@ public class FrmDraw extends JFrame {
 							}
 							circleShape.setEdgeColor(dialog.getEdgeColor());
 							circleShape.setBgColor(dialog.getBgColor());
-							circleShape.setSelected(false);
-							pnl.setLastShape(null);
 							pnl.repaint();
 						}
 					}
@@ -264,8 +261,6 @@ public class FrmDraw extends JFrame {
 							int y =	Integer.parseInt(dialog.getTxtY().getText());
 							pointShape.moveTo(x, y);
 							pointShape.setEdgeColor(dialog.getColor());
-							pointShape.setSelected(false);
-							pnl.setLastShape(null);
 							pnl.repaint();
 						}
 					}
@@ -288,8 +283,6 @@ public class FrmDraw extends JFrame {
 							lineShape.getStartPoint().moveTo(x, y);
 							lineShape.getEndPoint().moveTo(xSec, ySec);
 							lineShape.setEdgeColor(dialog.getColor());
-							lineShape.setSelected(false);
-							pnl.setLastShape(null);
 							pnl.repaint();
 						}
 					}
@@ -315,8 +308,6 @@ public class FrmDraw extends JFrame {
 							recShape.setHeight(height);
 							recShape.setEdgeColor(dialog.getEdgeColor());
 							recShape.setBgColor(dialog.getBgColor());
-							recShape.setSelected(false);
-							pnl.setLastShape(null);
 							pnl.repaint();
 						}
 					}
@@ -339,7 +330,7 @@ public class FrmDraw extends JFrame {
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//getting selected shape
+				// Getting selected shape
 				shape = pnl.getLastShape();
 				if (shape != null) {
 					int choice = JOptionPane.showConfirmDialog(FrmDraw.this,
@@ -369,7 +360,7 @@ public class FrmDraw extends JFrame {
 		tglbtnCircle.setEnabled(false);
 		tglbtnDonut.setEnabled(false);
 		
-		//opening dialogs and setting values for shapes
+		// Opening dialogs and setting values for shapes
 		pnl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -451,7 +442,9 @@ public class FrmDraw extends JFrame {
 							pnl.addShape(donut, edgeColor, bgColor);
 						}
 					}
-
+					
+					
+					
 				}
 
 				if (tglbtnSelect.isSelected()) {
