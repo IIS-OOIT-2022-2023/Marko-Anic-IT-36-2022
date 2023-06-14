@@ -203,17 +203,13 @@ public class FrmDraw extends JFrame {
 							// Changing original center
 							donutShape.moveTo(x, y);
 							// Changing original radius
-							try {
-								donutShape.setRadius(radius);
-							} catch (Exception e1) {
-								e1.printStackTrace();
-							}
+						
+							donutShape.setRadius(radius);
+							
 							// Changing original inner radius
-							try {
-								donutShape.setInnerRadius(innerRadius);
-							} catch (Exception e1) {
-								e1.printStackTrace();
-							}
+							
+							donutShape.setInnerRadius(innerRadius);
+
 							// Getting colors from dialog
 							donutShape.setEdgeColor(dialog.getEdgeColor());
 							donutShape.setBgColor(dialog.getBgColor());
