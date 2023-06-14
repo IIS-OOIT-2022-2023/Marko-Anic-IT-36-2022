@@ -207,7 +207,6 @@ public class FrmDraw extends JFrame {
 							donutShape.setRadius(radius);
 							
 							// Changing original inner radius
-							
 							donutShape.setInnerRadius(innerRadius);
 
 							// Getting colors from dialog
